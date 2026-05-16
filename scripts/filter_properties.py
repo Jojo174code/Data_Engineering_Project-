@@ -1,163 +1,92 @@
-import csv, zipfile, html, re
-from pathlib import Path
-from xml.sax.saxutils import escape
+from __future__ import annotations
 
-ROOT = Path(__file__).resolve().parents[1]
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from common_utils import ROOT, clean_text, looks_residential_address, parse_money, validate_workbook, write_dataframe_to_excel
+
 IN_CSV = ROOT / 'cleaned_data' / 'cleaned_auction_properties.csv'
 OUT_XLSX = ROOT / 'output_excel' / 'filtered_properties_3000_to_8000.xlsx'
-
 MIN_BID = 3000
 MAX_BID = 8000
 
-residential_ok = {'R', 'R IMP', 'R HS', 'R HS IMP', 'R IMP HS', 'R MH', 'R MH IMP'}
+RESIDENTIAL_HINTS = {'R', 'R IMP', 'R HS', 'R HS IMP', 'R IMP HS', 'R MH', 'R MH IMP'}
 
-def money_to_float(v):
-    try:
-        return float(v.replace(',', '').strip())
-    except Exception:
-        return None
 
-def xml_col(n):
-    s=''
-    while n:
-        n, rem = divmod(n-1, 26)
-        s = chr(65+rem) + s
-    return s
+def include_reason(row) -> str:
+    parts = [f"Bid ${row['bid_cost']:,.2f} within ${MIN_BID:,}-${MAX_BID:,} range"]
+    if row['property_type'] in RESIDENTIAL_HINTS:
+        parts.append(f"property_type={row['property_type']}")
+    elif row['property_type'] == 'Unknown' and looks_residential_address(row['property_address']):
+        parts.append('unknown property_type but address looks residential')
+    else:
+        parts.append('kept due to non-aggressive screening with usable address/parcel data')
+    if row['zip_code'] == 'Unknown':
+        parts.append('ZIP missing but row retained')
+    return '; '.join(parts)
 
-def shared_strings(values):
-    unique=[]; index={}
-    for v in values:
-        if v not in index:
-            index[v]=len(unique)
-            unique.append(v)
-    parts=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-           '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="%d" uniqueCount="%d">' % (len(values), len(unique))]
-    for s in unique:
-        parts.append('<si><t xml:space="preserve">%s</t></si>' % escape(str(s)))
-    parts.append('</sst>')
-    return '\n'.join(parts), index
-
-def make_sheet(rows, headers):
-    all_strings=[]
-    for h in headers:
-        all_strings.append(h)
-    for row in rows:
-        for h in headers:
-            v=row.get(h, '')
-            if not isinstance(v, (int, float)):
-                all_strings.append(str(v))
-    sst, sindex = shared_strings(all_strings)
-    xml=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-         '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
-         '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>',
-         '<sheetData>']
-    # header row
-    xml.append('<row r="1">')
-    for c,h in enumerate(headers, start=1):
-        ref=f'{xml_col(c)}1'
-        xml.append(f'<c r="{ref}" t="s" s="1"><v>{sindex[h]}</v></c>')
-    xml.append('</row>')
-    for r_idx,row in enumerate(rows, start=2):
-        xml.append(f'<row r="{r_idx}">')
-        for c,h in enumerate(headers, start=1):
-            ref=f'{xml_col(c)}{r_idx}'
-            v=row.get(h, '')
-            if isinstance(v, (int,float)):
-                style = '2' if 'Bid cost' in h else '0'
-                xml.append(f'<c r="{ref}" s="{style}"><v>{v}</v></c>')
-            else:
-                xml.append(f'<c r="{ref}" t="s"><v>{sindex[str(v)]}</v></c>')
-        xml.append('</row>')
-    xml.append('</sheetData>')
-    end_col=xml_col(len(headers))
-    xml.append(f'<autoFilter ref="A1:{end_col}{len(rows)+1}"/>')
-    cols=''.join([f'<col min="{i}" max="{i}" width="18" customWidth="1"/>' for i in range(1, len(headers)+1)])
-    xml.append(f'<cols>{cols}</cols>')
-    xml.append('</worksheet>')
-    return '\n'.join(xml), sst
-
-def write_xlsx(path, rows, headers):
-    sheet_xml, sst_xml = make_sheet(rows, headers)
-    content_types = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-<Default Extension="xml" ContentType="application/xml"/>
-<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
-<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
-<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>
-<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>
-<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
-<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
-</Types>'''
-    rels = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
-<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
-<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
-</Relationships>'''
-    wb = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-<sheets><sheet name="Filtered Properties" sheetId="1" r:id="rId1"/></sheets></workbook>'''
-    wb_rels = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
-<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
-<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>
-</Relationships>'''
-    styles = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>
-<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>
-<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>
-<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
-<cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs>
-<numFmts count="1"><numFmt numFmtId="164" formatCode="$#,##0.00"/></numFmts>
-</styleSheet>'''
-    core = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Filtered Tulsa Auction Properties</dc:title></cp:coreProperties>'''
-    app = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>OpenClaw</Application></Properties>'''
-    with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED) as z:
-        z.writestr('[Content_Types].xml', content_types)
-        z.writestr('_rels/.rels', rels)
-        z.writestr('xl/workbook.xml', wb)
-        z.writestr('xl/_rels/workbook.xml.rels', wb_rels)
-        z.writestr('xl/worksheets/sheet1.xml', sheet_xml)
-        z.writestr('xl/styles.xml', styles)
-        z.writestr('xl/sharedStrings.xml', sst_xml)
-        z.writestr('docProps/core.xml', core)
-        z.writestr('docProps/app.xml', app)
 
 def main():
-    rows=[]
-    seen=set()
-    with open(IN_CSV, newline='', encoding='utf-8') as f:
-        for r in csv.DictReader(f):
-            bid = money_to_float(r['minimum_bid'])
-            if bid is None or bid < MIN_BID or bid > MAX_BID or abs(bid - 100.0) < 0.001:
-                continue
-            ptype = ' '.join(r['property_type'].split())
-            if not ptype.startswith('R'):
-                continue
-            if r['parcel_id'] in seen:
-                continue
-            seen.add(r['parcel_id'])
-            rows.append({
-                'Property ID / Parcel ID': r['parcel_id'],
-                'Owner name': r['owner_name'] or 'Unknown',
-                'Address': r['address'],
-                'City': r['city'],
-                'ZIP code': r['zip_code'],
-                'Legal description': r['legal_description'],
-                'Bid cost': bid,
-                'Property type': ptype,
-                'Source notes': r['source_notes'],
-                'Auction list page/source location': f"PDF page {r['page_number']}"
-            })
-    rows.sort(key=lambda x: x['Bid cost'])
-    OUT_XLSX.parent.mkdir(parents=True, exist_ok=True)
-    write_xlsx(OUT_XLSX, rows, list(rows[0].keys()))
-    print(f'wrote {len(rows)} filtered properties to {OUT_XLSX}')
+    df = pd.read_csv(IN_CSV)
+    original_row_count = len(df)
+    df['bid_cost'] = df['bid_cost'].apply(parse_money)
+    valid_bid_df = df[df['bid_cost'].notna()].copy()
+    rows_with_valid_bid_cost = len(valid_bid_df)
+
+    range_df = valid_bid_df[(valid_bid_df['bid_cost'] >= MIN_BID) & (valid_bid_df['bid_cost'] <= MAX_BID) & (valid_bid_df['bid_cost'] != 100)].copy()
+    rows_in_range = len(range_df)
+
+    def keep_row(row):
+        ptype = clean_text(row['property_type']).upper()
+        if ptype in RESIDENTIAL_HINTS:
+            return True
+        if ptype in {'C', 'A'} and not looks_residential_address(row['property_address']):
+            return False
+        if ptype == 'UNKNOWN' and looks_residential_address(row['property_address']):
+            return True
+        return bool(clean_text(row['parcel_id']) and clean_text(row['property_address']))
+
+    screened_df = range_df[range_df.apply(keep_row, axis=1)].copy()
+    deduped_df = screened_df.drop_duplicates(subset=['parcel_id'], keep='first').copy()
+    rows_after_duplicate_removal = len(deduped_df)
+
+    deduped_df['filter_reason'] = deduped_df.apply(include_reason, axis=1)
+    deduped_df = deduped_df.sort_values(by=['bid_cost', 'parcel_id'], ascending=[True, True])
+
+    final_columns = [
+        'parcel_id', 'owner_name', 'property_address', 'city', 'state', 'zip_code', 'legal_description',
+        'bid_cost', 'property_type', 'source_page', 'extraction_confidence', 'filter_reason', 'raw_text'
+    ]
+    output_df = deduped_df[final_columns].copy()
+
+    print(f'Original row count: {original_row_count}')
+    print(f'Rows with valid bid cost: {rows_with_valid_bid_cost}')
+    print(f'Rows in $3,000-$8,000 range: {rows_in_range}')
+    print(f'Rows after duplicate removal: {rows_after_duplicate_removal}')
+    print(f'Final filtered row count: {len(output_df)}')
+
+    if output_df.empty:
+        raise ValueError('Final filtered row count is zero, stopping for debug.')
+
+    write_dataframe_to_excel(
+        output_df,
+        OUT_XLSX,
+        sheet_name='Filtered Properties',
+        currency_columns={'bid_cost'},
+        wrap_columns={'legal_description', 'filter_reason', 'raw_text'}
+    )
+    validation = validate_workbook(OUT_XLSX, min_rows=2, min_cols=2)
+    print(f"Excel validation result: sheets={validation['sheet_names']}, max_row={validation['max_row']}, max_column={validation['max_column']}")
+    print('First 5 rows:')
+    for row in validation['first_rows']:
+        print(row)
+
 
 if __name__ == '__main__':
     main()

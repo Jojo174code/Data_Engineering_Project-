@@ -1,207 +1,312 @@
-import csv, zipfile, re
+from __future__ import annotations
+
+import sys
 from pathlib import Path
-from xml.sax.saxutils import escape
 
-ROOT = Path(__file__).resolve().parents[1]
-IN_CSV = ROOT / 'cleaned_data' / 'cleaned_auction_properties.csv'
-OUT_XLSX = ROOT / 'output_excel' / 'investment_ranked_properties.xlsx'
+import pandas as pd
 
-MIN_BID = 3000
-MAX_BID = 8000
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
 
-ZIP_SAFETY = {
-    '74106': ('High', 2, 'North Tulsa area has historically elevated crime risk compared with metro averages.'),
-    '74110': ('High', 2, 'North Tulsa area has historically elevated crime risk compared with metro averages.'),
-    '74112': ('Medium', 5, 'Midtown/east Tulsa has mixed block-by-block risk.'),
-    '74114': ('Medium', 6, 'Established midtown area, generally better than citywide average but mixed by corridor.'),
-    '74115': ('High', 3, 'Airport and north-central Tulsa areas are generally higher risk.'),
-    '74126': ('High', 2, 'Far north Tulsa generally screens as higher risk.'),
-    '74127': ('High', 3, 'West/northwest Tulsa often has elevated risk.'),
-    '74128': ('High', 3, 'East Tulsa has many higher-risk pockets.'),
-    '74129': ('High', 3, 'East Tulsa has many higher-risk pockets.'),
-    '74133': ('Low', 7, 'South Tulsa is generally lower crime than citywide average.'),
-    '74134': ('Low', 7, 'Far southeast Tulsa is generally lower crime than citywide average.'),
-    '74135': ('Medium', 6, 'Central/south Tulsa is mixed but often more stable than city average.'),
-    '74136': ('Low', 7, 'South Tulsa tends to screen better on stability and crime.'),
-    '74137': ('Low', 8, 'Far south Tulsa tends to screen better on stability and crime.'),
+from common_utils import ROOT, clean_text, looks_residential_address, validate_workbook, write_dataframe_to_excel
+
+FILTERED_XLSX = ROOT / 'output_excel' / 'filtered_properties_3000_to_8000.xlsx'
+AI_REVIEW_CSV = ROOT / 'cleaned_data' / 'ai_property_reviews.csv'
+RANKED_XLSX = ROOT / 'output_excel' / 'investment_ranked_properties.xlsx'
+MANUAL_REVIEW_XLSX = ROOT / 'output_excel' / 'manual_review_top_candidates.xlsx'
+
+CATEGORY_PRIORITY = {
+    'Good Investment': 0,
+    'Strong Manual Review Candidate': 1,
+    'Mid Investment': 2,
+    'Bad Investment': 3,
+}
+CONF_PRIORITY = {'High': 0, 'Medium': 1, 'Low': 2}
+ZIP_CRIME = {
+    '74106': 'High', '74110': 'High', '74112': 'Medium', '74114': 'Medium', '74115': 'High', '74126': 'High',
+    '74127': 'High', '74128': 'High', '74129': 'High', '74133': 'Low', '74134': 'Low', '74135': 'Medium',
+    '74136': 'Low', '74137': 'Low'
 }
 ZIP_VALUES = {
-    '74106': ('$40k-$90k estimate', 2), '74110': ('$45k-$95k estimate', 3), '74112': ('$90k-$170k estimate', 5),
-    '74114': ('$140k-$300k+ estimate', 8), '74115': ('$55k-$110k estimate', 3), '74126': ('$40k-$90k estimate', 2),
-    '74127': ('$55k-$130k estimate', 4), '74128': ('$60k-$130k estimate', 3), '74129': ('$65k-$140k estimate', 4),
-    '74133': ('$180k-$350k+ estimate', 8), '74134': ('$180k-$325k+ estimate', 8), '74135': ('$120k-$240k estimate', 6),
-    '74136': ('$180k-$350k+ estimate', 8), '74137': ('$220k-$450k+ estimate', 9),
+    '74106': 'Low', '74110': 'Low', '74112': 'Moderate', '74114': 'Positive', '74115': 'Low', '74126': 'Low',
+    '74127': 'Low', '74128': 'Low', '74129': 'Moderate', '74133': 'Positive', '74134': 'Positive', '74135': 'Moderate',
+    '74136': 'Positive', '74137': 'Positive'
 }
 ZIP_GROWTH = {
-    '74106': ('Medium', 5, 'Some long-horizon redevelopment potential, but uneven execution risk.'),
-    '74110': ('Medium', 5, 'Some reinvestment potential, but neighborhood risk remains meaningful.'),
-    '74112': ('Medium', 6, 'Infill and midtown proximity help, but results vary a lot by street.'),
-    '74114': ('High', 8, 'Midtown location and established demand support long-run desirability.'),
-    '74115': ('Low', 3, 'Weaker screening signal for stable appreciation.'),
-    '74126': ('Low', 2, 'Limited evidence of near-term broad-based uplift.'),
-    '74127': ('Low', 3, 'Patchy upside, weaker broad investment signal.'),
-    '74128': ('Low', 3, 'Patchy upside and more operational risk.'),
-    '74129': ('Low', 3, 'Patchy upside and more operational risk.'),
-    '74133': ('High', 8, 'South Tulsa submarket generally benefits from stronger buyer and renter demand.'),
-    '74134': ('High', 8, 'South/east Tulsa generally benefits from stronger buyer and renter demand.'),
-    '74135': ('Medium', 6, 'Established neighborhoods and central access support moderate upside.'),
-    '74136': ('High', 8, 'South Tulsa market generally shows stronger stability and resale demand.'),
-    '74137': ('High', 9, 'Far south Tulsa typically screens well for stability and demand.'),
+    '74106': 'Unknown', '74110': 'Unknown', '74112': 'Moderate', '74114': 'Positive', '74115': 'Unknown', '74126': 'Unknown',
+    '74127': 'Unknown', '74128': 'Unknown', '74129': 'Unknown', '74133': 'Positive', '74134': 'Positive', '74135': 'Moderate',
+    '74136': 'Positive', '74137': 'Positive'
 }
-CITY_CRIME_NOTE = 'Tulsa citywide public crime summaries indicate above-average crime versus many U.S. cities, so ZIP-level estimates matter.'
-SOURCE_SET = 'Auction PDF; Tulsa citywide crime summary (NeighborhoodScout Tulsa crime page); ZIP/neighborhood heuristic estimates due limited property-level public access.'
 
-def money_to_float(v):
-    try:
-        return float(v.replace(',', '').strip())
-    except Exception:
-        return None
 
-def xml_col(n):
-    s=''
-    while n:
-        n, rem = divmod(n-1, 26)
-        s = chr(65+rem) + s
-    return s
+def bid_price_signal(bid: float) -> tuple[str, int]:
+    if bid <= 4500:
+        return 'Strong', 9
+    if bid <= 6500:
+        return 'Moderate', 6
+    return 'Weak', 3
 
-def shared_strings(values):
-    unique=[]; index={}
-    for v in values:
-        if v not in index:
-            index[v]=len(unique); unique.append(v)
-    parts=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-           '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="%d" uniqueCount="%d">' % (len(values), len(unique))]
-    for s in unique:
-        parts.append('<si><t xml:space="preserve">%s</t></si>' % escape(str(s)))
-    parts.append('</sst>')
-    return '\n'.join(parts), index
 
-def build_xlsx(rows, headers, path):
-    all_strings=[]
-    for h in headers: all_strings.append(h)
-    for row in rows:
-        for h in headers:
-            v=row.get(h, '')
-            if not isinstance(v, (int,float)): all_strings.append(str(v))
-    sst, sindex = shared_strings(all_strings)
-    xml=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-         '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
-         '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>',
-         '<sheetData>']
-    xml.append('<row r="1">')
-    for c,h in enumerate(headers, start=1):
-        xml.append(f'<c r="{xml_col(c)}1" t="s" s="1"><v>{sindex[h]}</v></c>')
-    xml.append('</row>')
-    for r_idx,row in enumerate(rows, start=2):
-        style = {'Good':'3','Mid':'4','Bad':'5'}.get(row['Investment category'], '0')
-        xml.append(f'<row r="{r_idx}" s="{style}">')
-        for c,h in enumerate(headers, start=1):
-            ref=f'{xml_col(c)}{r_idx}'
-            v=row.get(h, '')
-            if isinstance(v, (int,float)):
-                num_style = '2' if h == 'Bid cost' else style
-                xml.append(f'<c r="{ref}" s="{num_style}"><v>{v}</v></c>')
-            else:
-                xml.append(f'<c r="{ref}" t="s" s="{style}"><v>{sindex[str(v)]}</v></c>')
-        xml.append('</row>')
-    xml.append('</sheetData>')
-    end_col=xml_col(len(headers))
-    xml.append(f'<autoFilter ref="A1:{end_col}{len(rows)+1}"/>')
-    cols=''.join([f'<col min="{i}" max="{i}" width="20" customWidth="1"/>' for i in range(1, len(headers)+1)])
-    xml.append(f'<cols>{cols}</cols>')
-    xml.append('</worksheet>')
-    sheet_xml='\n'.join(xml)
-    styles='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>
-<fills count="5"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFC6EFCE"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFFEB9C"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFFC7CE"/><bgColor indexed="64"/></patternFill></fill></fills>
-<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>
-<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
-<numFmts count="1"><numFmt numFmtId="164" formatCode="$#,##0.00"/></numFmts>
-<cellXfs count="6"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="0" fillId="2" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="0" fontId="0" fillId="3" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="0" fontId="0" fillId="4" borderId="0" xfId="0" applyFill="1"/></cellXfs>
-</styleSheet>'''
-    content_types='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>'''
-    rels='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>'''
-    wb='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Investment Ranked" sheetId="1" r:id="rId1"/></sheets></workbook>'''
-    wb_rels='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/></Relationships>'''
-    core='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Investment Ranked Properties</dc:title></cp:coreProperties>'''
-    app='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>OpenClaw</Application></Properties>'''
-    with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED) as z:
-        z.writestr('[Content_Types].xml', content_types)
-        z.writestr('_rels/.rels', rels)
-        z.writestr('xl/workbook.xml', wb)
-        z.writestr('xl/_rels/workbook.xml.rels', wb_rels)
-        z.writestr('xl/worksheets/sheet1.xml', sheet_xml)
-        z.writestr('xl/styles.xml', styles)
-        z.writestr('xl/sharedStrings.xml', sst)
-        z.writestr('docProps/core.xml', core)
-        z.writestr('docProps/app.xml', app)
+def address_quality_signal(address: str) -> tuple[str, int]:
+    address = clean_text(address)
+    if looks_residential_address(address):
+        return 'Complete', 9
+    if address and address.upper() != 'ADDRESS UNKNOWN':
+        return 'Partial', 5
+    return 'Missing', 1
 
-def classify(row):
-    bid = money_to_float(row['minimum_bid'])
-    if bid is None or bid < MIN_BID or bid > MAX_BID or not 'R' == row['property_type'].strip().split()[0]:
-        return None
-    zip_code = row['zip_code'].strip()
-    addr = row['address'].strip()
-    low_conf = addr == 'ADDRESS UNKNOWN' or not zip_code
-    crime_label, crime_score, crime_note = ZIP_SAFETY.get(zip_code, ('Unknown', 4, 'No ZIP-specific public estimate was verified.'))
-    value_est, value_score = ZIP_VALUES.get(zip_code, ('Unknown', 4))
-    growth_label, growth_score, growth_note = ZIP_GROWTH.get(zip_code, ('Unknown', 4, 'No ZIP-specific growth estimate was verified.'))
-    price_score = 8 if bid <= 4000 else 7 if bid <= 5000 else 6 if bid <= 6500 else 5
-    clarity_score = 3 if low_conf else 7 if zip_code else 5
-    total = round(price_score*0.20 + value_score*0.25 + crime_score*0.20 + growth_score*0.25 + clarity_score*0.10)
-    if total >= 8:
-        cat, color, rec = 'Good', 'Green', 'Bid'
-    elif total >= 5:
-        cat, color, rec = 'Mid', 'Yellow', 'Watch'
+
+def property_clarity_signal(parcel_id: str, address: str, legal_description: str) -> tuple[str, int]:
+    score = 0
+    if clean_text(parcel_id):
+        score += 1
+    if looks_residential_address(address):
+        score += 1
+    if clean_text(legal_description):
+        score += 1
+    if score == 3:
+        return 'Strong', 9
+    if score == 2:
+        return 'Moderate', 6
+    return 'Weak', 2
+
+
+def data_confidence(extraction_confidence: str, zip_code: str, clarity_signal: str) -> str:
+    if extraction_confidence == 'High' and zip_code != 'Unknown' and clarity_signal == 'Strong':
+        return 'High'
+    if extraction_confidence in {'High', 'Medium'} and clarity_signal in {'Strong', 'Moderate'}:
+        return 'Medium'
+    return 'Low'
+
+
+def score_rule_based(row) -> dict:
+    bid = float(row['bid_cost'])
+    zip_code = clean_text(row['zip_code']) or 'Unknown'
+    addr_signal, addr_score = address_quality_signal(row['property_address'])
+    clarity_signal, clarity_score = property_clarity_signal(row['parcel_id'], row['property_address'], row['legal_description'])
+    price_signal, price_score = bid_price_signal(bid)
+
+    crime = ZIP_CRIME.get(zip_code, 'Unknown')
+    crime_score = {'Low': 8, 'Medium': 5, 'High': 2, 'Unknown': 4}[crime]
+    value_signal = ZIP_VALUES.get(zip_code, 'Unknown')
+    value_score = {'Positive': 8, 'Moderate': 6, 'Low': 3, 'Unknown': 4}[value_signal]
+    growth_signal = ZIP_GROWTH.get(zip_code, 'Unknown')
+    growth_score = {'Positive': 8, 'Moderate': 6, 'Unknown': 4}[growth_signal]
+    confidence = data_confidence(row['extraction_confidence'], zip_code, clarity_signal)
+    confidence_score = {'High': 9, 'Medium': 6, 'Low': 3}[confidence]
+
+    rule_score = round(
+        price_score * 0.20 +
+        addr_score * 0.15 +
+        clarity_score * 0.15 +
+        max(crime_score, growth_score) * 0.20 +
+        value_score * 0.20 +
+        confidence_score * 0.10,
+        1,
+    )
+
+    property_type = clean_text(row['property_type']).upper()
+    raw_text = clean_text(row.get('raw_text', ''))
+    red_flag_terms = ['COMMERCIAL', 'INDUSTRIAL', 'VACANT ONLY', 'LANDLOCKED']
+    red_flag = any(term in raw_text.upper() for term in red_flag_terms)
+    strong_manual = (
+        3000 <= bid <= 5500 and
+        addr_signal == 'Complete' and
+        clean_text(row['parcel_id']) and
+        clean_text(row['legal_description']) and
+        confidence in {'Medium', 'High'} and
+        not red_flag and
+        not property_type.startswith('C')
+    )
+
+    if (
+        price_signal == 'Strong' and addr_signal == 'Complete' and clarity_signal == 'Strong' and
+        value_signal == 'Positive' and growth_signal in {'Positive', 'Moderate'} and crime != 'High' and confidence in {'Medium', 'High'}
+    ):
+        category = 'Good Investment'
+    elif strong_manual:
+        category = 'Strong Manual Review Candidate'
+    elif addr_signal == 'Missing' or not clean_text(row['parcel_id']) or (bid >= 6500 and confidence == 'Low') or red_flag:
+        category = 'Bad Investment'
     else:
-        cat, color, rec = 'Bad', 'Red', 'Avoid'
-    if low_conf and cat == 'Good':
-        cat, color, rec, total = 'Mid', 'Yellow', 'Watch', min(total, 7)
-    risks=[]
-    if crime_label == 'High': risks.append('Higher crime-risk area estimate')
-    if value_est in ('Unknown', '$40k-$90k estimate', '$45k-$95k estimate'): risks.append('Weak or low surrounding value signal')
-    if low_conf: risks.append('Address incomplete or low-confidence match')
-    if row['property_type'].strip() == 'R': risks.append('Could be vacant lot or unimproved parcel, verify improvements')
-    confidence = 'Low' if low_conf or zip_code == '' else 'Medium'
-    explanation = f"Bid of ${bid:,.2f} was screened against ZIP-level surrounding value estimates, Tulsa crime context, and neighborhood demand/growth heuristics. {crime_note} {growth_note}".strip()
+        category = 'Mid Investment'
+
+    manual_review_flag = category in {'Good Investment', 'Strong Manual Review Candidate'} or confidence == 'Low'
+    risks = []
+    if crime == 'High':
+        risks.append('High crime-risk estimate')
+    if value_signal in {'Low', 'Unknown'}:
+        risks.append('Weak or unverified surrounding value signal')
+    if addr_signal != 'Complete':
+        risks.append('Address quality issue')
+    if confidence == 'Low':
+        risks.append('Low data confidence')
+    if property_type == 'R':
+        risks.append('Could be lot-only or unimproved, verify improvements')
+    if not risks:
+        risks.append('Needs normal title/condition verification')
+
+    next_step = 'Drive by and verify assessor/parcel details' if manual_review_flag else 'Verify title, liens, and parcel details before bidding'
+    recommendation = 'Research First' if category in {'Good Investment', 'Strong Manual Review Candidate', 'Mid Investment'} else 'Avoid'
+    if category == 'Good Investment':
+        recommendation = 'Bid Candidate'
+    elif category == 'Strong Manual Review Candidate':
+        recommendation = 'Drive By'
+
+    reasoning = (
+        f"Bid {bid:,.2f}, address quality {addr_signal.lower()}, parcel/address clarity {clarity_signal.lower()}, "
+        f"crime signal {crime.lower()}, surrounding value signal {value_signal.lower()}, growth signal {growth_signal.lower()}, "
+        f"data confidence {confidence.lower()}."
+    )
+
     return {
-        'Property ID / Parcel ID': row['parcel_id'],
-        'Address': addr,
-        'ZIP code': zip_code or 'Unknown',
-        'Bid cost': bid,
-        'Estimated surrounding property value': value_est,
-        'Crime risk: Low / Medium / High': crime_label,
-        'Neighborhood investment potential: Low / Medium / High': growth_label,
-        'Investment score: 1–10': total,
-        'Investment category': cat,
-        'Color status': color,
-        'Explanation of rating': explanation,
-        'Key risks': '; '.join(risks) if risks else 'None identified from limited public screening data',
-        'Data confidence: High / Medium / Low': confidence,
-        'Sources used / links researched': SOURCE_SET,
-        'Recommendation: Bid / Watch / Avoid': rec,
+        'rule_based_score': rule_score,
+        'rule_based_category': category,
+        'manual_review_flag': manual_review_flag,
+        'crime_risk_estimate': crime,
+        'surrounding_value_signal': value_signal,
+        'neighborhood_growth_signal': growth_signal,
+        'bid_price_signal': price_signal,
+        'address_quality_signal': addr_signal,
+        'property_clarity_signal': clarity_signal,
+        'data_confidence': confidence,
+        'reasoning_summary': reasoning,
+        'key_risks': '; '.join(risks),
+        'next_due_diligence_step': next_step,
+        'recommendation': recommendation,
     }
 
+
+def merge_ai_reviews(df: pd.DataFrame) -> tuple[pd.DataFrame, int, bool, str]:
+    fallback_used = False
+    failed_ai_reviews = 0
+    model_used = 'Rule-based only'
+    if AI_REVIEW_CSV.exists():
+        ai_df = pd.read_csv(AI_REVIEW_CSV)
+        if not ai_df.empty:
+            model_used = ai_df['model_used'].dropna().iloc[0] if 'model_used' in ai_df.columns and ai_df['model_used'].dropna().any() else 'LiteLLM'
+            df = df.merge(ai_df, on='parcel_id', how='left')
+        else:
+            fallback_used = True
+    else:
+        fallback_used = True
+
+    ai_cols_defaults = {
+        'ai_review_score': None,
+        'investment_category': None,
+        'recommendation_ai': None,
+        'reasoning_summary_ai': None,
+        'key_risks_ai': None,
+        'missing_information': None,
+        'next_due_diligence_step_ai': None,
+        'confidence_level': None,
+        'manual_review_flag_ai': None,
+    }
+    for col, default in ai_cols_defaults.items():
+        if col not in df.columns:
+            df[col] = default
+
+    for idx, row in df.iterrows():
+        if pd.isna(row['ai_review_score']):
+            failed_ai_reviews += 1
+            fallback_used = True
+            df.at[idx, 'ai_review_score'] = row['rule_based_score']
+            df.at[idx, 'investment_category'] = row['rule_based_category']
+            df.at[idx, 'manual_review_flag_ai'] = row['manual_review_flag']
+            df.at[idx, 'recommendation_ai'] = row['recommendation']
+            df.at[idx, 'reasoning_summary_ai'] = 'AI review failed; fallback rule-based score used.'
+            df.at[idx, 'key_risks_ai'] = row['key_risks']
+            df.at[idx, 'missing_information'] = 'No AI review available.'
+            df.at[idx, 'next_due_diligence_step_ai'] = row['next_due_diligence_step']
+            df.at[idx, 'confidence_level'] = 'Low'
+
+    df['manual_review_flag'] = df['manual_review_flag_ai'].fillna(df['manual_review_flag']).astype(bool)
+    df['recommendation'] = df['recommendation_ai'].fillna(df['recommendation'])
+    df['reasoning_summary'] = df['reasoning_summary_ai'].fillna(df['reasoning_summary'])
+    df['key_risks'] = df['key_risks_ai'].fillna(df['key_risks'])
+    df['next_due_diligence_step'] = df['next_due_diligence_step_ai'].fillna(df['next_due_diligence_step'])
+    df['confidence_level'] = df['confidence_level'].fillna(df['data_confidence'])
+    return df, failed_ai_reviews, fallback_used, model_used
+
+
+def build_manual_review(df: pd.DataFrame) -> pd.DataFrame:
+    review_df = df[df['manual_review_flag'] == True].copy()
+    review_df['category_sort'] = review_df['investment_category'].map({'Strong Manual Review Candidate': 0, 'Good Investment': 1, 'Mid Investment': 2, 'Bad Investment': 3}).fillna(4)
+    review_df['confidence_sort'] = review_df['confidence_level'].map(CONF_PRIORITY).fillna(3)
+    review_df = review_df.sort_values(by=['category_sort', 'ai_review_score', 'bid_cost', 'confidence_sort'], ascending=[True, False, True, True]).head(50)
+    review_df['rank'] = range(1, len(review_df) + 1)
+    review_df['why_it_is_worth_reviewing'] = review_df['reasoning_summary']
+    review_df['main_risk'] = review_df['key_risks']
+    review_df = review_df[[
+        'rank', 'parcel_id', 'property_address', 'city', 'zip_code', 'bid_cost', 'ai_review_score', 'investment_category',
+        'why_it_is_worth_reviewing', 'main_risk', 'missing_information', 'next_due_diligence_step', 'recommendation', 'confidence_level'
+    ]]
+    return review_df
+
+
 def main():
-    seen=set(); rows=[]
-    with open(IN_CSV, newline='', encoding='utf-8') as f:
-        for row in csv.DictReader(f):
-            if row['parcel_id'] in seen:
-                continue
-            seen.add(row['parcel_id'])
-            c = classify(row)
-            if c:
-                rows.append(c)
-    order = {'Good':0,'Mid':1,'Bad':2}
-    rows.sort(key=lambda r: (order[r['Investment category']], -r['Investment score: 1–10'], r['Bid cost']))
-    OUT_XLSX.parent.mkdir(parents=True, exist_ok=True)
-    build_xlsx(rows, list(rows[0].keys()), OUT_XLSX)
-    print(f'wrote {len(rows)} ranked properties to {OUT_XLSX}')
+    df = pd.read_excel(FILTERED_XLSX)
+    baseline = df.apply(score_rule_based, axis=1, result_type='expand')
+    ranked_df = pd.concat([df, baseline], axis=1)
+    ranked_df, failed_ai_reviews, fallback_used, model_used = merge_ai_reviews(ranked_df)
+
+    ranked_df = ranked_df.rename(columns={'recommendation': 'recommendation'})
+    ranked_df = ranked_df[[
+        'parcel_id', 'property_address', 'city', 'state', 'zip_code', 'bid_cost', 'legal_description', 'property_type', 'source_page',
+        'extraction_confidence', 'rule_based_score', 'rule_based_category', 'bid_price_signal', 'address_quality_signal',
+        'property_clarity_signal', 'crime_risk_estimate', 'surrounding_value_signal', 'neighborhood_growth_signal', 'data_confidence',
+        'ai_review_score', 'investment_category', 'manual_review_flag', 'recommendation', 'reasoning_summary', 'key_risks',
+        'missing_information', 'next_due_diligence_step', 'confidence_level', 'filter_reason', 'raw_text'
+    ]]
+
+    ranked_df['category_sort'] = ranked_df['investment_category'].map(CATEGORY_PRIORITY).fillna(9)
+    ranked_df['confidence_sort'] = ranked_df['confidence_level'].map(CONF_PRIORITY).fillna(9)
+    ranked_df = ranked_df.sort_values(by=['category_sort', 'ai_review_score', 'bid_cost', 'confidence_sort'], ascending=[True, False, True, True])
+    ranked_df = ranked_df.drop(columns=['category_sort', 'confidence_sort'])
+
+    write_dataframe_to_excel(
+        ranked_df,
+        RANKED_XLSX,
+        sheet_name='Investment Ranked',
+        currency_columns={'bid_cost'},
+        wrap_columns={'legal_description', 'reasoning_summary', 'key_risks', 'missing_information', 'next_due_diligence_step', 'filter_reason', 'raw_text'},
+        category_fill_column='investment_category',
+        category_fills={
+            'Good Investment': 'C6EFCE',
+            'Strong Manual Review Candidate': 'D9EAF7',
+            'Mid Investment': 'FFEB9C',
+            'Bad Investment': 'FFC7CE',
+        }
+    )
+
+    manual_review_df = build_manual_review(ranked_df)
+    if manual_review_df.empty:
+        raise ValueError('manual_review_top_candidates.xlsx would be empty, stopping for debug.')
+
+    write_dataframe_to_excel(
+        manual_review_df,
+        MANUAL_REVIEW_XLSX,
+        sheet_name='Manual Review',
+        currency_columns={'bid_cost'},
+        wrap_columns={'why_it_is_worth_reviewing', 'main_risk', 'missing_information', 'next_due_diligence_step'},
+        category_fill_column='investment_category',
+        category_fills={
+            'Good Investment': 'C6EFCE',
+            'Strong Manual Review Candidate': 'D9EAF7',
+            'Mid Investment': 'FFEB9C',
+            'Bad Investment': 'FFC7CE',
+        }
+    )
+
+    validation_ranked = validate_workbook(RANKED_XLSX, min_rows=2, min_cols=2)
+    validation_manual = validate_workbook(MANUAL_REVIEW_XLSX, min_rows=2, min_cols=2)
+    print(f"Investment workbook validation: sheets={validation_ranked['sheet_names']}, rows={validation_ranked['max_row']}, cols={validation_ranked['max_column']}")
+    print(f"Manual review workbook validation: sheets={validation_manual['sheet_names']}, rows={validation_manual['max_row']}, cols={validation_manual['max_column']}")
+    print(f'Failed AI reviews: {failed_ai_reviews}')
+    print(f'Fallback rule-based scoring used: {fallback_used}')
+    print(f'Model used: {model_used}')
+
 
 if __name__ == '__main__':
     main()

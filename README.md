@@ -1,102 +1,136 @@
-# Tulsa 2026 Auction Property Analysis
+# Tulsa 2026 Auction Analysis Pipeline
 
-This repository stores a structured screening pass for the **2026 Tulsa County June resale auction land/property list**.
+This repository contains a rebuilt screening pipeline for the **2026 Tulsa County June resale auction list**.
 
 ## What this project does
 
-- Stores the original auction list PDF
-- Extracts auction rows into a cleaned CSV
-- Filters residential-looking properties with minimum bids between **$3,000 and $8,000**
-- Produces Excel outputs for review
-- Applies a cautious investment screen using available public context and clearly-labeled heuristics where exact public property-level data could not be verified cleanly
+- stores the source auction PDF
+- extracts auction rows into a cleaned CSV
+- filters properties with bid costs between **$3,000 and $8,000**
+- rebuilds Excel outputs using **pandas + openpyxl only**
+- applies a transparent rule-based investment screen
+- optionally applies a grounded LiteLLM AI review layer from local `.env` credentials
+- validates every output by reopening the generated workbooks before commit
 
 ## Auction list analyzed
 
-- Source file: `auction_lists/2026_tulsa_auction_list.pdf`
-- Original report title in PDF: **Land List for 2026 June Resale Auction**
-- Jurisdiction: Tulsa County, Oklahoma
+- source file: `auction_lists/2026_tulsa_auction_list.pdf`
+- PDF title: **Land List for 2026 June Resale Auction**
+- jurisdiction: Tulsa County, Oklahoma
 
-## Folder structure
+## What failed in the previous run
 
-```text
-OpenClaw_Context/
-├── auction_lists/
-│   └── 2026_tulsa_auction_list.pdf
-├── cleaned_data/
-│   └── cleaned_auction_properties.csv
-├── output_excel/
-│   ├── filtered_properties_3000_to_8000.xlsx
-│   └── investment_ranked_properties.xlsx
-├── scripts/
-│   ├── extract_auction_properties.py
-│   ├── filter_properties.py
-│   └── investment_ranker.py
-└── README.md
-```
+The previous run did extract rows, but the workbook generation used a handwritten XLSX writer instead of `openpyxl`. That created fragile/corrupt Excel files that could appear blank or open in repair mode even though the underlying XML contained rows. The earlier scoring was also too generic and too pessimistic, with no strong manual-review tier.
 
-## Filtering rules used
+## How the extraction was fixed
 
-Included only rows that met all of these:
+- extraction now uses `pdfplumber`
+- every detected auction row is preserved even if some fields are unknown
+- owner names default to `Unknown` when absent
+- ZIP codes default to `Unknown` when not detected
+- bid costs are normalized to numeric values where possible
+- `raw_text` is preserved for manual debugging
+- `extraction_confidence` is written for every row
+- illegal Excel control characters are stripped before output
 
-- Minimum bid **>= $3,000**
-- Minimum bid **<= $8,000**
-- Excluded **$100 bids**
-- Excluded rows with unreadable or missing bid values
-- Excluded duplicate parcel IDs
-- Excluded rows that did not look residential from the auction-list property-type field
-- Rows with incomplete addresses were retained only if they still passed the extraction rules, but they are flagged with lower confidence in downstream scoring
+## Filtering rules
 
-## Generated files
+- minimum bid: **$3,000**
+- maximum bid: **$8,000**
+- exclude **$100 bids**
+- exclude duplicate parcel IDs
+- prefer residential-looking rows, but do not over-filter aggressively
+- if property type is unknown, keep the row if the address still looks usable/residential
+- keep rows with missing ZIP, owner, or property type when the parcel/address data is still usable
 
-### 1) `cleaned_data/cleaned_auction_properties.csv`
-A cleaned intermediate extraction from the PDF with key fields such as parcel ID, legal description, address, city, property type, minimum bid, fees, and source page.
+## Files regenerated
 
-### 2) `output_excel/filtered_properties_3000_to_8000.xlsx`
-Contains the filtered property list sorted by bid cost ascending.
+- `cleaned_data/cleaned_auction_properties.csv`
+- `cleaned_data/ai_property_reviews.csv`
+- `output_excel/filtered_properties_3000_to_8000.xlsx`
+- `output_excel/investment_ranked_properties.xlsx`
+- `output_excel/manual_review_top_candidates.xlsx`
+- `scripts/extract_auction_properties.py`
+- `scripts/filter_properties.py`
+- `scripts/investment_ranker.py`
+- `scripts/ai_property_reviewer.py`
+- `scripts/validate_outputs.py`
 
-### 3) `output_excel/investment_ranked_properties.xlsx`
-Contains the filtered list with an investment screen including:
+## How Excel outputs are validated
 
-- estimated surrounding value band
-- crime-risk estimate
-- neighborhood investment potential estimate
-- overall investment score (1 to 10)
-- category: Good / Mid / Bad
-- color status: Green / Yellow / Red
-- explanation, risks, confidence, and recommendation
+Each workbook is created with `pandas.ExcelWriter(..., engine="openpyxl")` and then reopened with `openpyxl` to confirm:
 
-## How investment ratings were calculated
+- workbook opens successfully
+- worksheet exists
+- worksheet row count is greater than 1
+- worksheet column count is greater than 1
+- headers are present
 
-The ranking uses this weighted model:
+This prevents the earlier false-success case where a file existed on disk but was not a trustworthy workbook.
+
+## Rule-based scoring model
+
+The baseline scoring is deterministic before any AI review:
 
 - **Bid price attractiveness:** 20%
-- **Surrounding property values / comps:** 25%
-- **Crime / safety:** 20%
-- **Neighborhood investment / growth potential:** 25%
-- **Data confidence / property clarity:** 10%
+- **Address quality:** 15%
+- **Property clarity:** 15%
+- **Neighborhood/location signal:** 20%
+- **Surrounding value signal:** 20%
+- **Data confidence:** 10%
 
-### Rating bands
+### Categories
 
-- **Good Investment (Green):** score 8 to 10
-- **Mid Investment (Yellow):** score 5 to 7
-- **Bad Investment (Red):** score 1 to 4
+- **Good Investment**
+  - stronger bid price
+  - complete parcel/address data
+  - positive surrounding value or neighborhood growth signal
+  - crime risk not high
+  - medium or high confidence
 
-## Public data sources used
+- **Strong Manual Review Candidate**
+  - promising low-to-mid bid range
+  - clean parcel/address data
+  - worth deeper manual research
+  - not automatically a buy
 
-This screening used the following source types:
+- **Mid Investment**
+  - mixed signals
+  - not enough evidence for Good
+  - not weak enough to discard immediately
 
-- Tulsa County auction PDF itself
-- Tulsa citywide public crime summary context (NeighborhoodScout Tulsa crime page)
-- ZIP / neighborhood-level heuristic scoring for likely crime pressure, demand, and value bands when exact parcel-level public data could not be verified reliably in an automated way
+- **Bad Investment**
+  - high data risk, missing address/parcel data, high crime concern, high price with weak clarity, or other obvious red flags
 
-## Important limitations
+## LiteLLM grounded AI review
 
-- The source PDF did **not** expose owner names in the extracted table, so owner names are recorded as `Unknown` unless independently verified later.
-- Exact parcel-level public comps, assessor values, or address-level crime stats were **not consistently available through clean unauthenticated public endpoints** during this automated pass.
-- Some ZIP codes were missing from the extracted rows, which lowers confidence.
-- Some rows marked residential in the auction list may still be vacant lots or otherwise require further verification.
-- The investment ranking workbook is a **screening tool**, not a substitute for parcel-by-parcel diligence.
+The AI layer reads credentials only from local `.env` values:
 
-## Warning
+- `LITELLM_API_KEY`
+- `LITELLM_BASE_URL`
+- `LITELLM_MODEL`
 
-**Final purchase decisions require title research, physical inspection, county assessor review, lien review, zoning review, code violation review, and legal due diligence. This analysis is only a screening tool and should not be treated as final investment advice.**
+The AI reviewer is a second-pass screen only. It uses:
+
+1. extracted auction row data
+2. rule-based signals
+3. known missing information
+4. verified public/heuristic context already present in the row set
+
+It is instructed to avoid generic responses and must reference concrete row fields such as bid cost, parcel ID, address quality, legal description quality, or missing ZIP/address data. If the response is too generic or invalid JSON, the script retries once and then falls back to the rule-based result.
+
+## Why `.env` is required
+
+LiteLLM credentials must stay local and must **never** be committed. The repository uses `.gitignore` to exclude:
+
+- `.env`
+- `.env.local`
+- `*.env`
+
+The validation step also checks that `.env` is not tracked by git.
+
+## Due diligence warning
+
+**This is a screening tool, not final investment advice. Before bidding, verify the property through Tulsa County Assessor records, title/lien checks, code violation checks, zoning checks, physical inspection or drive-by, Google Street View, recent nearby sales, and estimated rehab costs.**
+
+**The AI review is a screening layer only. It does not verify title, liens, code violations, structure condition, ARV, rehab cost, rentability, zoning, or legal ownership.**
