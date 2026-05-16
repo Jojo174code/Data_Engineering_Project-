@@ -1,0 +1,9 @@
+total filtered properties: 371
+properties with Strong Match: 35
+properties with Possible Match: 0
+properties with No Clear Match: 334
+properties with Unknown: 2
+top matched development areas:
+Fair Oaks Innovation Park: 367
+Tulsa Market District: 3
+Greenwood District: 1

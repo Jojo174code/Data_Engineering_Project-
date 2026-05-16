@@ -1,0 +1,16 @@
+total sources searched: 8
+total development items found: 7
+number of high-confidence items: 2
+number of medium-confidence items: 5
+number of low-confidence items: 0
+investment signal high items: 3
+investment signal medium items: 3
+investment signal low items: 1
+top development areas identified:
+Downtown Tulsa
+Fair Oaks Innovation Park
+Greenwood District
+Regional transportation network
+Tulsa Market District
+Tulsa commercial corridors
+Tulsa redevelopment sites

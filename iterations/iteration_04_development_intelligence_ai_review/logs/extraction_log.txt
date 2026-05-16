@@ -1,0 +1,26 @@
+Processed 25/205 pages...
+Processed 50/205 pages...
+Processed 75/205 pages...
+Processed 100/205 pages...
+Processed 125/205 pages...
+Processed 150/205 pages...
+Processed 175/205 pages...
+Processed 200/205 pages...
+total PDF pages processed: 205
+total raw candidate rows found: 1326
+total extracted rows: 1326
+rows with parcel_id: 1326
+rows with address: 1326
+rows with bid_cost: 1326
+rows missing bid_cost: 0
+first 10 extracted rows:
+{'parcel_id': '00575-93-06-00770', 'owner_name': 'Unknown', 'property_address': '405 S WHEELING AV E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LT 24 S3.4 LT 25 BLK 6', 'bid_cost': 1468.51, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': "1 00575-93-06-00770 405 S WHEELING AV E 3,920 R IMP 1,468.51 567.50 | LT 24 S3.4 LT 25 BLK 6 CITY OF TULSA | ABDO'S ADDN", 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00575-93-06-00950', 'owner_name': 'Unknown', 'property_address': '401 S VICTOR AV E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LTS 25 & 26 LESS ST BLK-7', 'bid_cost': 4526.88, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': "2 00575-93-06-00950 401 S VICTOR AV E 5,600 R IMP 4,526.88 379.50 | LTS 25 & 26 LESS ST BLK-7 CITY OF TULSA | ABDO'S ADDN", 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00575-93-06-01170', 'owner_name': 'Unknown', 'property_address': '511 S VICTOR AV E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LTS 43 & 44 BLK 8', 'bid_cost': 3910.27, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': "3 00575-93-06-01170 511 S VICTOR AV E 7,000 R IMP 3,910.27 504.50 | LTS 43 & 44 BLK 8 CITY OF TULSA | ABDO'S ADDN", 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00700-03-33-00090', 'owner_name': 'Unknown', 'property_address': 'ADDRESS UNKNOWN', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'S30 E66.23 LT 7 BLK 1', 'bid_cost': 14.66, 'property_type': 'R', 'source_page': 1, 'raw_text': '4 00700-03-33-00090 ADDRESS UNKNOWN 1,987 R 14.66 318.00 | S30 E66.23 LT 7 BLK 1 CITY OF TULSA | ACME ACRE ADD', 'extraction_confidence': 'Medium', 'extraction_notes': 'partial or unknown address'}
+{'parcel_id': '00725-03-33-00530', 'owner_name': 'Unknown', 'property_address': '1326 N KNOXVILLE AV E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LT 2', 'bid_cost': 6743.65, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': '5 00725-03-33-00530 1326 N KNOXVILLE AV E 9,435 R IMP 6,743.65 442.50 | LT 2 CITY OF TULSA | ACME ACRE ADDN RESUB L41-42', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00775-02-25-00490', 'owner_name': 'Unknown', 'property_address': '223 E ZION ST N', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'W1/2 LT 13 BLK 2', 'bid_cost': 2546.41, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': '6 00775-02-25-00490 223 E ZION ST N 8,960 R IMP 2,546.41 348.00 | W1/2 LT 13 BLK 2 CITY OF TULSA | ACRE GARDENS', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00775-02-25-00730', 'owner_name': 'Unknown', 'property_address': '325 E YOUNG PL N', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'E84 LT 8 BLK 4', 'bid_cost': 3819.61, 'property_type': 'R IMP', 'source_page': 1, 'raw_text': '7 00775-02-25-00730 325 E YOUNG PL N 11,760 R IMP 3,819.61 332.25 | E84 LT 8 BLK 4 CITY OF TULSA | ACRE GARDENS', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00775-02-25-01100', 'owner_name': 'Unknown', 'property_address': '303 E WOODROW ST N', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'W1/2 LT 16 BLK 8', 'bid_cost': 2716.39, 'property_type': 'R IMP', 'source_page': 2, 'raw_text': '8 00775-02-25-01100 303 E WOODROW ST N 8,960 R IMP 2,716.39 536.00 | W1/2 LT 16 BLK 8 CITY OF TULSA | ACRE GARDENS', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00875-02-35-00590', 'owner_name': 'Unknown', 'property_address': '1313 N BOSTON PL E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LT 12 BLK 2', 'bid_cost': 2584.89, 'property_type': 'R HS IMP', 'source_page': 2, 'raw_text': '9 00875-02-35-00590 1313 N BOSTON PL E 5,382 R HS IMP 2,584.89 332.25 | LT 12 BLK 2 CITY OF TULSA | ADAMS RESUB L5-19 B1 & L1-17 B2 CLINESS CREST', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}
+{'parcel_id': '00900-02-35-00210', 'owner_name': 'Unknown', 'property_address': '1141 N BOSTON PL E', 'city': 'Tulsa', 'state': 'OK', 'zip_code': 'Unknown', 'legal_description': 'LT 21 BLK 1', 'bid_cost': 1197.21, 'property_type': 'R IMP', 'source_page': 2, 'raw_text': '10 00900-02-35-00210 1141 N BOSTON PL E 6,900 R IMP 1,197.21 332.25 | LT 21 BLK 1 CITY OF TULSA | ADAMS RESUB B1 THE POUDER AND POMEROY', 'extraction_confidence': 'High', 'extraction_notes': 'parsed cleanly'}

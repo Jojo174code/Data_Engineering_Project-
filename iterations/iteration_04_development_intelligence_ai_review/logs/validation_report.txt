@@ -1,0 +1,21 @@
+cleaned CSV row count: 1326
+filtered CSV row count: 371
+development intelligence row count: 7
+property development match count: 371
+AI review row count: 371
+filtered Excel row count: 372
+investment Excel row count: 372
+manual review Excel row count: 51
+development opportunity Excel row count: 36
+Good Investment count: 4
+Strong Manual Review Candidate count: 256
+Mid Investment count: 108
+Bad Investment count: 3
+development opportunity count: 35
+invalid category count: 0
+invalid recommendation count: 0
+invalid confidence count: 0
+development items missing source_url: 0
+development opportunity rows missing reason: 0
+.env or .venv staged: False
+validation PASS
