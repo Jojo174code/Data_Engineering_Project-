@@ -1,0 +1,10 @@
+total filtered properties: 371
+previous Strong Match count: 35
+corrected Strong Match count: 10
+properties with Possible Match: 0
+properties with No Clear Match: 359
+properties with Unknown: 2
+removed weak development matches: 27
+top matched development areas:
+Tulsa Market District: 9
+Greenwood District: 1

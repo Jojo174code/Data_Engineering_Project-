@@ -1,0 +1,26 @@
+total properties: 371
+previous Strong Match count: 35
+corrected Strong Match count: 10
+removed weak development matches: 27
+Good Investment count: 5
+Strong Manual Review Candidate count: 255
+Mid Investment count: 108
+Bad Investment count: 3
+invalid category count: 0
+invalid recommendation count: 0
+invalid confidence count: 0
+invalid match quality count: 0
+invalid weak-match development flags: 0
+.env or .venv staged: False
+top 10 candidates after strict matching:
+{'parcel_id': '92224-22-24-13020', 'property_address': '15100 N PEORIA AV', 'bid_cost': 3059.81, 'investment_category': 'Good Investment', 'ai_review_score': 8.7}
+{'parcel_id': '11000-83-06-00270', 'property_address': '1394 E 66 PL S', 'bid_cost': 3946.95, 'investment_category': 'Good Investment', 'ai_review_score': 8.7}
+{'parcel_id': '91236-12-36-50430', 'property_address': '6834 N PEORIA AV E', 'bid_cost': 4220.53, 'investment_category': 'Good Investment', 'ai_review_score': 8.7}
+{'parcel_id': '90329-03-29-41780', 'property_address': '1504 N HARVARD AV E', 'bid_cost': 6614.0, 'investment_category': 'Good Investment', 'ai_review_score': 8.2}
+{'parcel_id': '91236-12-36-47530', 'property_address': '7002 N PEORIA AV E', 'bid_cost': 7624.18, 'investment_category': 'Good Investment', 'ai_review_score': 8.0}
+{'parcel_id': '10175-93-02-01530', 'property_address': '444 S 66 AV E', 'bid_cost': 5366.03, 'investment_category': 'Strong Manual Review Candidate', 'ai_review_score': 8.5}
+{'parcel_id': '44650-92-04-13070', 'property_address': '4805 W ARCHER ST N', 'bid_cost': 3183.01, 'investment_category': 'Strong Manual Review Candidate', 'ai_review_score': 8.0}
+{'parcel_id': '53450-02-01-01960', 'property_address': '5602 N PEORIA AV E', 'bid_cost': 4526.74, 'investment_category': 'Strong Manual Review Candidate', 'ai_review_score': 8.0}
+{'parcel_id': '43775-93-05-22530', 'property_address': '208 S HARVARD AV E', 'bid_cost': 5098.15, 'investment_category': 'Strong Manual Review Candidate', 'ai_review_score': 8.0}
+{'parcel_id': '13800-02-12-02160', 'property_address': '4726 N FRANKFORT AV E', 'bid_cost': 3086.51, 'investment_category': 'Strong Manual Review Candidate', 'ai_review_score': 7.7}
+validation PASS
