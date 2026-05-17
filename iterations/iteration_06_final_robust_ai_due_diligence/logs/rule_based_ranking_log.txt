@@ -1,0 +1,6 @@
+final properties scored: 371
+Good Investment count: 0
+Strong Manual Review Candidate count: 299
+Mid Investment count: 67
+Bad Investment count: 5
+properties downgraded from previous Good: 4

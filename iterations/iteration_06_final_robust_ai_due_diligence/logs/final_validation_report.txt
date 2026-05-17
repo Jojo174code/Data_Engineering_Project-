@@ -1,0 +1,24 @@
+total final properties: 371
+final manual review candidate count: 370
+final development opportunity count: 3
+final Good Investment count: 0
+final Strong Manual Review Candidate count: 157
+final Mid Investment count: 209
+final Bad Investment count: 5
+number geocoded successfully: 297
+number geocoding failed: 74
+final Strong Match count: 0
+final Possible Match count: 3
+final No Clear Match count: 366
+final Unknown match count: 2
+number of weak matches removed: 0
+number of properties downgraded from previous Good: 5
+invalid category count: 0
+invalid recommendation count: 0
+invalid confidence count: 0
+missing development opportunity reason count: 0
+Good rows with invalid confidence count: 0
+Good rows relying on No Clear/Unknown development count: 0
+missing expected output columns: []
+.env or .venv staged: False
+validation PASS

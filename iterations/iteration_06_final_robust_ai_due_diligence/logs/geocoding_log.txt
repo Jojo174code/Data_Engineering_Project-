@@ -1,0 +1,7 @@
+total properties attempted: 371
+property geocoding successes: 297
+property geocoding failures: 74
+development geocoding successes: 10
+development geocoding failures: 1
+distance-verified matches: 0
+downgraded development matches: 0

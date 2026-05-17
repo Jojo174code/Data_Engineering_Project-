@@ -1,0 +1,372 @@
+parcel_id,property_geocode_status,property_latitude,property_longitude,development_geocode_status,development_latitude,development_longitude,estimated_distance_miles,geocode_confidence,distance_verified_match,corrected_development_match_strength,geocode_notes
+92224-22-24-13020,Failed,,,Success,36.147890605377,-95.975600953152,,Medium,False,Possible Match,"Property geocoding failed via Census; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Match remains plausible but not distance-verified"
+11000-83-06-00270,Success,36.067305164603,-95.973586865874,Success,36.147890605377,-95.975600953152,5.57,High,False,No Clear Match,"Property geocoded via Census: 1394 E 66TH PL, TULSA, OK, 74136; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (5.57 miles)"
+91236-12-36-50430,Success,36.25387213778,-95.973737305054,Success,36.147890605377,-95.975600953152,7.32,High,False,No Clear Match,"Property geocoded via Census: 6834 N PEORIA AVE, TULSA, OK, 74126; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (7.32 miles)"
+90329-03-29-41780,Success,36.17725961655,-95.940354221596,Success,36.147890605377,-95.975600953152,2.83,High,False,No Clear Match,"Property geocoded via Census: 1504 N HARVARD AVE, TULSA, OK, 74115; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (2.83 miles)"
+91236-12-36-47530,Success,36.255959670744,-95.973752936594,Success,36.147890605377,-95.975600953152,7.47,High,False,No Clear Match,"Property geocoded via Census: 7002 N PEORIA AVE, TULSA, OK, 74126; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (7.47 miles)"
+10175-93-02-01530,Success,36.249290292377,-95.989466893024,Success,36.147890605377,-95.975600953152,7.05,High,False,No Clear Match,"Property geocoded via Census: 444 E 66TH ST N, TULSA, OK, 74130; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (7.05 miles)"
+44650-92-04-13070,Success,36.156091131573,-96.04615712791,Success,36.159797603799,-95.986063449504,3.36,High,False,No Clear Match,"Property geocoded via Census: 4805 W ARCHER ST, TULSA, OK, 74127; Development geocode query used: Greenwood and Archer, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (3.36 miles)"
+53450-02-01-01960,Success,36.235091881607,-95.975617979952,Success,36.147890605377,-95.975600953152,6.03,High,False,No Clear Match,"Property geocoded via Census: 5602 N PEORIA AVE, TULSA, OK, 74126; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (6.03 miles)"
+43775-93-05-22530,Success,36.157995749616,-95.94042417535,Success,36.147890605377,-95.975600953152,2.08,High,False,Possible Match,"Property geocoded via Census: 208 S HARVARD AVE, TULSA, OK, 74112; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows limited but still plausible proximity (2.08 miles)"
+13800-02-12-02160,Success,36.222650576211,-95.989041808554,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4726 N FRANKFORT AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+37650-02-12-04530,Success,36.229691513188,-95.980702265373,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 868 E 52ND PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+38575-03-28-12560,Success,36.189525394095,-95.924053669608,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2443 N VANDALIA AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+40850-02-12-06130,Success,36.227337295835,-95.985782332588,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 641 E 50TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+34300-03-32-15230,Success,36.163814750021,-95.951436965385,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 135 N COLUMBIA AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+29675-03-07-09890,Success,36.225463742207,-95.963747230207,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2017 E 49TH ST N, TULSA, OK, 74130; Base match was already No Clear Match"
+41025-02-01-06220,Success,36.239213618698,-95.991065389062,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5914 N ELGIN AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+34300-03-32-14790,Success,36.163176755474,-95.94931891028,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 124 N DELAWARE AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+29775-02-26-04910,Success,36.185922558061,-95.996425187314,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2220 N DENVER BLVD, TULSA, OK, 74106; Base match was already No Clear Match"
+41025-02-01-04500,Success,36.239657885347,-95.98682631053,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 537 E 59TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+26725-02-25-17680,Success,36.182888834591,-95.990064912209,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 412 E UTE ST, TULSA, OK, 74106; Base match was already No Clear Match"
+44200-02-11-04390,Success,36.221705597878,-95.997109962247,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4696 N BOULDER AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+47700-02-26-09610,Success,36.190423154524,-95.996858656136,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2525 N MAIN ST, TULSA, OK, 74106; Base match was already No Clear Match"
+36090-03-08-00970,Success,36.222713213722,-95.953682086387,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4721 N BIRMINGHAM PL, TULSA, OK, 74130; Base match was already No Clear Match"
+34750-02-26-08160,Success,36.190174012922,-95.996765838706,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2507 N MAIN ST, TULSA, OK, 74106; Base match was already No Clear Match"
+19725-03-30-11560,Success,36.189022864938,-95.966402930552,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1743 E YOUNG PL, TULSA, OK, 74110; Base match was already No Clear Match"
+78810-84-11-09860,Success,36.050442265624,-95.78445905535,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 514 E DALLAS ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+23175-03-30-13610,Success,36.190170887109,-95.974458919161,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2526 N QUAKER AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+90327-03-27-26880,Success,36.183517909192,-95.922389804848,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2011 N YALE AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+25500-03-29-06000,Success,36.18117337181,-95.953094674767,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1831 N BIRMINGHAM PL, TULSA, OK, 74110; Base match was already No Clear Match"
+53775-02-02-00220,Success,36.24260417802,-95.995782843656,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6105 N MAIN ST, TULSA, OK, 74126; Base match was already No Clear Match"
+23125-02-25-15350,Success,36.181814281492,-95.976699829711,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1864 N OWASSO AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+40800-02-13-04700,Success,36.21687588551,-95.980615687674,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4309 N KENOSHA AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+07600-02-24-01200,Success,36.205919299694,-95.982049299737,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 820 E 36TH ST N, TULSA, OK, 74106; Base match was already No Clear Match"
+44200-02-11-01790,Success,36.226625888237,-95.99796420238,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 137 W 50TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+16050-93-06-08050,Success,36.157581640405,-95.965729518255,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1810 E 2ND ST, TULSA, OK, 74104; Base match was already No Clear Match"
+09725-03-30-08040,Success,36.187610893327,-95.962362082106,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2043 E XYLER ST, TULSA, OK, 74110; Base match was already No Clear Match"
+44200-02-14-06630,Success,36.21883075976,-95.995381612962,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 18 E 44TH PL N, TULSA, OK, 74106; Base match was already No Clear Match"
+44250-02-12-14920,Success,36.233342956927,-95.988479758982,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5531 N FRANKFORT PL, TULSA, OK, 74126; Base match was already No Clear Match"
+44200-02-11-03530,Success,36.221797399366,-95.995026799601,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4697 N BOSTON AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+44225-02-12-09330,Success,36.22821753479,-95.984337936821,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 711 E 51ST PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+07725-02-13-02930,Success,36.207728299291,-95.980478393345,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 918 E 37TH ST N, TULSA, OK, 74106; Base match was already No Clear Match"
+79200-84-14-04250,Success,36.044381894159,-95.792207604599,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 215 W JACKSON ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+07675-02-13-01140,Success,36.212150840991,-95.985477917949,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4018 N GARRISON AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+49650-03-34-13420,Success,36.164838359978,-95.922105924159,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4932 E HASKELL ST, TULSA, OK, 74115; Base match was already No Clear Match"
+41025-02-01-06510,Success,36.237810869257,-95.989475428092,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5744 N FRANKFORT AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+15500-03-32-04800,Success,36.174009678862,-95.949715336372,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1313 N DELAWARE AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+05825-03-30-01260,Success,36.183314364524,-95.974323114074,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2039 N QUAKER AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+49700-03-34-14030,Success,36.165838252274,-95.920121043896,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5107 E HASKELL PL, TULSA, OK, 74115; Base match was already No Clear Match"
+32325-92-24-04910,Success,36.11470745836,-95.97688972897,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1114 E 33RD PL, TULSA, OK, 74105; Base match was already No Clear Match"
+44200-02-11-01060,Success,36.225722429067,-95.996557602555,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 34 W 50TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+17675-02-24-07570,Success,36.201854898987,-95.982780686786,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 750 E 32ND PL N, TULSA, OK, 74106; Base match was already No Clear Match"
+25500-03-29-06060,Success,36.182042399135,-95.952852694507,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2625 E TECUMSEH ST, TULSA, OK, 74110; Base match was already No Clear Match"
+44200-02-11-03380,Success,36.220987135395,-95.995021684362,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4627 N BOSTON AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+24275-93-06-15110,Success,36.159719898832,-95.972895575782,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1435 E ADMIRAL BLVD, TULSA, OK, 74120; Base match was already No Clear Match"
+44250-02-12-15190,Success,36.23223749598,-95.987565221629,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 549 E 54TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+53825-02-02-01310,Success,36.245020060938,-95.996128962711,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7 E 63RD ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+29650-03-07-03460,Success,36.231362294793,-95.97467866148,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1338 E 54TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+46465-92-11-31880,Success,36.134188428311,-96.0058308983,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2034 S PHOENIX AVE, TULSA, OK, 74107; Base match was already No Clear Match"
+24200-03-28-04080,Success,36.180810277843,-95.939160660515,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1803 N INDIANAPOLIS AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+12175-92-03-02290,Success,36.157914348546,-96.026563966228,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3034 W CAMERON ST, TULSA, OK, 74127; Base match was already No Clear Match"
+07675-02-13-01590,Success,36.210877993086,-95.990502249042,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4013 N ELGIN AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+04550-03-32-02430,Success,36.166455353,-95.944706440735,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 813 N FLORENCE AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+26250-92-05-02570,Success,36.154686609517,-96.047694803548,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4914 W 1ST ST, TULSA, OK, 74127; Base match was already No Clear Match"
+44225-02-12-10920,Success,36.230650185685,-95.988321472943,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5308 N FRANKFORT PL, TULSA, OK, 74126; Base match was already No Clear Match"
+29625-02-36-21010,Success,36.173898591322,-95.990693433911,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 419 E NEWTON PL, TULSA, OK, 74106; Base match was already No Clear Match"
+10450-03-19-50550,Success,36.199553300346,-95.967785315986,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3128 N TROOST PL, TULSA, OK, 74106; Base match was already No Clear Match"
+28025-93-11-08980,Success,36.055583325541,-95.964311267376,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1942 E 74TH PL, TULSA, OK, 74136; Base match was already No Clear Match"
+37650-02-12-04250,Success,36.230507098439,-95.980849603516,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 834 E 53RD ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+40825-02-13-08480,Success,36.217022306094,-95.984594734137,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4346 N HARTFORD AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+29675-03-07-09230,Success,36.227057482898,-95.964145639013,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1901 E 50TH PL N, TULSA, OK, 74130; Base match was already No Clear Match"
+90201-02-01-25920,Success,36.242160462976,-95.988081126151,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 502 E 61ST ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+08450-03-29-03260,Success,36.185297892939,-95.946891969161,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2901 E WOODROW ST, TULSA, OK, 74110; Base match was already No Clear Match"
+07675-02-13-01610,Success,36.211287006898,-95.989662930777,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 421 E 40TH ST N, TULSA, OK, 74106; Base match was already No Clear Match"
+44200-02-11-02340,Success,36.224943186751,-95.997582632969,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 110 W 49TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+30125-03-28-10360,Success,36.187615746398,-95.929302885481,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4117 E XYLER ST, TULSA, OK, 74115; Base match was already No Clear Match"
+44200-02-11-02050,Success,36.2257289357,-95.997772277968,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 106 W 50TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+01800-03-35-01450,Success,36.176568173983,-95.889949308698,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7569 E OKLAHOMA PL, TULSA, OK, 74115; Base match was already No Clear Match"
+61475-91-11-02110,Success,36.142534970008,-96.106417458366,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 526 WASHINGTON AVE, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+29650-03-07-06110,Success,36.228141392046,-95.974133231066,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1354 E 51ST ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+40850-02-12-06950,Success,36.225832905166,-95.988413213577,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 524 E 49TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+38605-92-05-04540,Success,36.1491179047,-96.050051353609,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5145 W 6TH ST, TULSA, OK, 74127; Base match was already No Clear Match"
+24200-03-28-06670,Success,36.179857720369,-95.933144965163,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1588 N OSWEGO AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+28975-03-28-09640,Success,36.184712178631,-95.934845107229,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3756 E VIRGIN PL, TULSA, OK, 74115; Base match was already No Clear Match"
+07675-02-13-01570,Success,36.210988573522,-95.990561574897,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4021 N ELGIN AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+22025-03-35-07520,Success,36.250991291318,-95.974870279722,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1226 E 67TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+34750-02-26-08560,Success,36.190097961762,-95.996897878824,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 15 W ZION ST, TULSA, OK, 74106; Base match was already No Clear Match"
+30200-02-26-07150,Success,36.182544369083,-95.999486114005,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1902 N DENVER AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+21600-02-35-08590,Success,36.174304383324,-95.99690292326,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1348 N MAIN ST, TULSA, OK, 74106; Base match was already No Clear Match"
+35925-03-30-16670,Success,36.185274525888,-95.966578486749,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1745 E WOODROW ST, TULSA, OK, 74110; Base match was already No Clear Match"
+63700-12-13-00540,Success,36.296422127736,-95.989381600734,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 118 S BRYAN ST, SPERRY, OK, 74073; Base match was already No Clear Match"
+44200-02-11-01080,Success,36.22504571116,-95.997181756276,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 103 W 49TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+98224-82-24-37060,Success,36.024195041348,-95.980771884492,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 919 W MAIN ST, JENKS, OK, 74037; Base match was already No Clear Match"
+17925-92-04-03330,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+00775-02-25-00730,Success,36.188802688364,-95.99104531339,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 325 E YOUNG PL, TULSA, OK, 74106; Base match was already No Clear Match"
+41950-02-24-12580,Success,36.200762639708,-95.986186679455,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3209 N GARRISON AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+04925-03-35-02930,Success,36.1739827638,-95.897781082796,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7107 E NEWTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+45600-94-16-00400,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+44325-03-36-04550,Success,36.17475399246,-95.874082921527,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 9165 E NEWTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+56625-92-20-01430,Success,36.08071491737,-96.028789515217,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3190 W 57TH ST, TULSA, OK, 74107; Base match was already No Clear Match"
+29650-03-07-05860,Success,36.22828437368,-95.970493494184,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1513 E 51ST ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+00575-93-06-01170,Success,36.153917226727,-95.965856756192,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 511 S VICTOR AVE, TULSA, OK, 74104; Base match was already No Clear Match"
+20300-92-03-05280,Success,36.157964901265,-96.013979897431,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1903 W CAMERON ST, TULSA, OK, 74127; Base match was already No Clear Match"
+49800-03-34-15300,Success,36.171415609754,-95.919241684517,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1145 N CANTON AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+23900-03-27-09360,Success,36.178252256706,-95.909705904914,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1532 N KINGSTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+40325-94-17-06900,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+02350-03-35-02480,Success,36.170792039927,-95.904284578663,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6521 E LATIMER PL, TULSA, OK, 74115; Base match was already No Clear Match"
+16275-92-05-01670,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+34300-03-32-14720,Success,36.163776586793,-95.949322567741,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 152 N DELAWARE AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+49725-03-34-14590,Success,36.163951938476,-95.922431324575,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4902 E EASTON ST, TULSA, OK, 74115; Base match was already No Clear Match"
+07725-02-13-02870,Success,36.210557054197,-95.980729416849,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3917 N LANSING AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+63125-91-11-15420,Success,36.143609364821,-96.115317063926,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 607 N WILSON AVE, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+99203-92-03-14350,Success,36.158819965703,-96.02401724389,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2822 W EASTON ST, TULSA, OK, 74127; Base match was already No Clear Match"
+23125-02-25-14790,Success,36.183563124822,-95.97781843659,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2016 N NORFOLK AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+37800-93-02-09080,Success,36.154240607933,-95.904226491111,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6526 E 5TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+15125-03-33-05670,Success,36.175893535924,-95.926830874852,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1433 N TOLEDO AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+26825-93-01-08300,Success,36.155653383578,-95.874571631846,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 9126 E 4TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+26825-93-01-07370,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+43925-03-35-15210,Success,36.168541986425,-95.895337410487,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7311 E KING ST, TULSA, OK, 74115; Base match was already No Clear Match"
+29350-03-07-02400,Success,36.220680431355,-95.962235844719,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2131 E 46TH ST N, TULSA, OK, 74130; Base match was already No Clear Match"
+44250-02-12-14150,Success,36.232119344435,-95.984005533974,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 710 E 54TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+35900-03-30-15790,Success,36.190139169527,-95.964392641586,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2504 N XANTHUS AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+44200-02-11-01560,Success,36.227397348188,-95.997809255326,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 141 W 50TH CT N, TULSA, OK, 74126; Base match was already No Clear Match"
+40825-02-13-09510,Success,36.214033335678,-95.989458852379,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4137 N FRANKFORT AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+23900-03-27-09230,Success,36.177846549346,-95.911827986237,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1555 N JOPLIN AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+30200-02-26-07080,Success,36.183126822082,-96.000740766737,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1916 N ELWOOD AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+25650-03-34-12590,Success,36.166399774396,-95.913353180266,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 816 N HUDSON AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+37050-03-35-12510,Success,36.174019686914,-95.903123591211,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6615 E NEWTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+34300-03-32-15710,Success,36.163442145717,-95.953656116239,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 121 N BIRMINGHAM AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+41675-03-35-13900,Success,36.171133075092,-95.897561130739,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7122 E MARSHALL ST, TULSA, OK, 74115; Base match was already No Clear Match"
+37800-93-02-09760,Success,36.153413745929,-95.897662995121,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7111 E 5TH PL, TULSA, OK, 74112; Base match was already No Clear Match"
+02400-03-32-00700,Success,36.163759902518,-95.953792743326,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 516 N BIRMINGHAM AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+12875-94-08-06230,Success,36.142478303939,-95.845500025223,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 11804 E 14TH ST, TULSA, OK, 74128; Base match was already No Clear Match"
+79600-84-11-12350,Success,36.047449378611,-95.794726384221,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 412 W GALVESTON ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+37800-93-02-09990,Success,36.152530293663,-95.89770418002,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7107 E 6TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+25225-03-35-09460,Success,36.169375406365,-95.889935221755,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7849 E KING PL, TULSA, OK, 74115; Base match was already No Clear Match"
+41650-03-35-13120,Success,36.172161629777,-95.899200308603,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6923 E MARSHALL PL, TULSA, OK, 74115; Base match was already No Clear Match"
+42675-93-02-14170,Success,36.159839868501,-95.894013813156,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7447 E 1ST ST, TULSA, OK, 74112; Base match was already No Clear Match"
+11225-02-24-03490,Success,36.193387667387,-95.985657131374,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 643 MOHAWK BLVD, TULSA, OK, 74106; Base match was already No Clear Match"
+34600-93-25-02050,Success,36.040290409938,-95.922570837855,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4732 E 85TH ST, TULSA, OK, 74137; Base match was already No Clear Match"
+22100-92-28-02330,Success,36.104542398201,-96.038555038262,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4109 W 41ST ST S, TULSA, OK, 74107; Base match was already No Clear Match"
+12060-94-08-20510,Success,36.144027014644,-95.841002165133,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 12217 E 13TH PL, TULSA, OK, 74128; Base match was already No Clear Match"
+16250-92-05-01100,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+41025-02-01-01230,Success,36.235319486087,-95.989125335683,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5607 N FRANKFORT AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+44200-02-11-05670,Success,36.221900069581,-95.999245301711,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 313 W 47TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+05450-02-25-27030,Success,36.18866630299,-95.986495790495,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 610 E YOUNG PL, TULSA, OK, 74106; Base match was already No Clear Match"
+40825-02-13-08350,Success,36.21735593923,-95.986720729328,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4355 N GARRISON AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+44200-02-11-03560,Success,36.221727364558,-95.995168400481,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4690 N BOSTON AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+41025-02-01-04490,Success,36.239657885343,-95.986759794772,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 543 E 59TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+44200-02-11-01470,Success,36.224254630096,-95.994941080004,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 113 E 49TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+29775-02-26-05550,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+37375-03-32-16320,Success,36.172588826579,-95.953735179943,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2601 E MARSHALL ST, TULSA, OK, 74110; Base match was already No Clear Match"
+52550-92-33-05285,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+17675-02-24-08030,Success,36.199723199766,-95.984106902244,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3130 N HARTFORD PL, TULSA, OK, 74106; Base match was already No Clear Match"
+25375-03-29-05240,Success,36.187139882456,-95.942062427989,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3215 E XYLER ST, TULSA, OK, 74110; Base match was already No Clear Match"
+18650-93-06-12970,Success,36.155981128307,-95.961093216375,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 348 S ZUNIS AVE, TULSA, OK, 74104; Base match was already No Clear Match"
+28475-03-33-14410,Success,36.171900287179,-95.924687275025,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1211 N VANDALIA AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+90330-03-30-22140,Success,36.190275684943,-95.963088455199,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2049 E ZION ST, TULSA, OK, 74110; Base match was already No Clear Match"
+44200-02-11-03600,Success,36.221519010965,-95.995167085134,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4672 N BOSTON AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+19725-03-30-11590,Success,36.188996840136,-95.966632245685,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1729 E YOUNG PL, TULSA, OK, 74110; Base match was already No Clear Match"
+27550-93-08-18710,Success,36.145251631746,-95.954813079672,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1239 S ATLANTA PL, TULSA, OK, 74104; Base match was already No Clear Match"
+07600-02-24-00740,Success,36.203004616898,-95.980520461055,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3353 N LANSING PL, TULSA, OK, 74106; Base match was already No Clear Match"
+13200-02-26-00860,Success,36.177277450372,-95.996950271785,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1516 N MAIN ST, TULSA, OK, 74106; Base match was already No Clear Match"
+25525-03-29-06940,Success,36.183427077052,-95.952171186465,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2012 N COLUMBIA AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+49600-03-17-06000,Success,36.218773082206,-95.949957944571,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2738 E 45TH ST N, TULSA, OK, 74110; Base match was already No Clear Match"
+59900-24-20-00058,Success,36.37494727745,-95.842805983529,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1115 N 15TH ST, COLLINSVILLE, OK, 74021; Base match was already No Clear Match"
+09175-93-05-05710,Success,36.151694307961,-95.955432391002,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2520 E 6TH ST, TULSA, OK, 74104; Base match was already No Clear Match"
+90326-03-26-20930,Success,36.177144251165,-95.899558140476,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6945 E PINE ST, TULSA, OK, 74115; Base match was already No Clear Match"
+36075-03-08-00420,Success,36.223843083835,-95.955468845388,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2548 E 48TH ST N, TULSA, OK, 74130; Base match was already No Clear Match"
+13775-02-12-01490,Success,36.221003356911,-95.984452685726,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4641 N HARTFORD AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+17675-02-24-07550,Success,36.201224667983,-95.982996509288,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3179 N IROQUOIS AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+36525-94-02-01380,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+20300-92-03-05240,Success,36.157964901274,-96.01415582759,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1919 W CAMERON ST, TULSA, OK, 74127; Base match was already No Clear Match"
+27775-03-36-02105,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+35900-03-30-15590,Success,36.19016030155,-95.963775722668,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2012 E ZION ST, TULSA, OK, 74110; Base match was already No Clear Match"
+19650-03-35-06970,Success,36.173998736414,-95.899606067794,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6943 E NEWTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+10225-93-02-04460,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+29675-03-07-10040,Success,36.224505330975,-95.963931175045,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4823 N XANTHUS AVE, TULSA, OK, 74130; Base match was already No Clear Match"
+25200-03-35-07780,Success,36.16604363695,-95.900976434263,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6780 E INDEPENDENCE ST, TULSA, OK, 74115; Base match was already No Clear Match"
+34750-02-26-07380,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+37775-93-03-07050,Success,36.157794911097,-95.908698182008,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6126 E 3RD ST, TULSA, OK, 74112; Base match was already No Clear Match"
+00575-93-06-00950,Success,36.154980464223,-95.96587609021,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 401 S VICTOR AVE, TULSA, OK, 74104; Base match was already No Clear Match"
+49800-03-34-14990,Success,36.172323535616,-95.921020113931,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1241 N ALLEGHENY AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+60513-73-08-70260,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+07410-94-07-23780,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+90212-02-12-25800,Success,36.226787852609,-95.978273126571,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1130 E 50TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+44325-03-36-03990,Success,36.173869883195,-95.870926837188,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 9415 E NEWTON ST, TULSA, OK, 74115; Base match was already No Clear Match"
+25150-03-34-10030,Success,36.169776600202,-95.912845448655,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1059 N IRVINGTON AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+09000-92-27-06570,Success,36.104486910888,-96.016114960351,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2111 W 41ST ST S, TULSA, OK, 74107; Base match was already No Clear Match"
+46825-03-33-18040,Success,36.173764889805,-95.928113529078,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1312 N SANDUSKY AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+43800-93-04-19370,Success,36.154644535939,-95.93036638318,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 420 S QUEBEC AVE, TULSA, OK, 74112; Base match was already No Clear Match"
+36150-93-04-13930,Success,36.156777449436,-95.925643052363,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 220 S URBANA AVE, TULSA, OK, 74112; Base match was already No Clear Match"
+78810-84-11-09060,Success,36.053507347484,-95.786332895208,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 416 E COLLEGE ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+25050-03-34-03580,Success,36.176395767994,-95.909606274367,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1455 N KINGSTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+27775-03-36-02215,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+63725-12-13-01130,Success,36.29876773454,-95.986479877623,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 215 N ELGIN AVE, SPERRY, OK, 74073; Base match was already No Clear Match"
+18550-93-05-13060,Success,36.149830175483,-95.955770051776,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2505 E 8TH ST, TULSA, OK, 74104; Base match was already No Clear Match"
+29775-02-26-05800,Success,36.182709694354,-95.99679692807,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1923 N MAIN ST, TULSA, OK, 74106; Base match was already No Clear Match"
+05075-93-24-08770,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+13775-02-12-01430,Success,36.220691408255,-95.984455729152,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4615 N HARTFORD AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+57370-72-13-63370,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+19275-03-34-02480,Success,36.175446849937,-95.920183684047,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1407 N BRADEN AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+17950-92-04-05170,Success,36.153532464789,-96.041792200195,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4413 W 3RD ST, TULSA, OK, 74127; Base match was already No Clear Match"
+62075-91-11-09360,Success,36.14598496804,-96.108999018246,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 800 N MCKINLEY AVE, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+17925-92-04-04250,Success,36.223366875262,-95.999326870852,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 316 W 48TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+06625-92-27-02490,Success,36.194237666513,-96.042113724848,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4648 W 31ST ST N, TULSA, OK, 74127; Base match was already No Clear Match"
+45450-94-06-10580,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+17025-02-36-12170,Success,36.171629159528,-95.989001226887,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1173 N FRANKFORT AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+40850-02-12-07500,Success,36.224245938634,-95.987776135182,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 534 E 48TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+04350-02-25-02620,Success,36.178286647985,-95.97768374542,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1537 N NORFOLK AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+06100-02-26-00080,Success,36.180739774526,-95.9958205172,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1806 N BOSTON AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+08375-03-29-02800,Success,36.185142622915,-95.949184969935,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2141 N DELAWARE AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+41100-92-34-03610,Success,36.119015319115,-96.058966065897,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5902 W 31ST ST S, TULSA, OK, 74107; Base match was already No Clear Match"
+22200-03-36-00370,Success,36.172926988302,-95.877222470896,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 8934 E MARSHALL PL, TULSA, OK, 74115; Base match was already No Clear Match"
+74985-94-20-10040,Success,36.118075301609,-95.837055500901,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 12608 E 31ST PL, TULSA, OK, 74146; Base match was already No Clear Match"
+85315-72-15-46520,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+11575-03-35-04690,Success,36.170202514157,-95.895373970718,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7320 E LATIMER PL, TULSA, OK, 74115; Base match was already No Clear Match"
+30950-03-33-14960,Success,36.169030512296,-95.939640694793,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3337 E KING PL, TULSA, OK, 74115; Base match was already No Clear Match"
+12150-93-11-01280,Success,36.144387913188,-95.89313670108,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7519 E 13TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+07700-02-13-02200,Success,36.211480321959,-95.990715089166,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4026 N ELGIN AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+10475-92-08-00680,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+31125-92-27-16750,Success,36.126187189537,-96.041509148408,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4235 W 26TH ST, TULSA, OK, 74107; Base match was already No Clear Match"
+29650-03-07-03370,Success,36.231362294746,-95.97376878835,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1380 E 54TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+29650-03-07-03310,Success,36.230686628879,-95.969640031912,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1577 E 53RD ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+13850-93-05-10530,Success,36.161753897473,-95.953581753226,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2605 E ADMIRAL CT, TULSA, OK, 74110; Base match was already No Clear Match"
+22100-92-28-03130,Success,36.104401848098,-96.03599199903,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3904 W 41ST ST S, TULSA, OK, 74107; Base match was already No Clear Match"
+27875-92-11-03570,Success,36.147914745246,-96.005814457118,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 701 S PHOENIX AVE, TULSA, OK, 74127; Base match was already No Clear Match"
+45350-94-06-07290,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+78810-84-11-09070,Success,36.053509296424,-95.786244543082,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 424 E COLLEGE ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+20725-93-03-06410,Success,36.155094165146,-95.905802013911,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6330 E 4TH PL, TULSA, OK, 74112; Base match was already No Clear Match"
+41025-02-01-00530,Success,36.237114150163,-95.988107094108,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 518 E 57TH PL N, TULSA, OK, 74126; Base match was already No Clear Match"
+07225-02-13-00060,Success,36.211390548058,-95.979537297549,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3936 N LANSING PL, TULSA, OK, 74106; Base match was already No Clear Match"
+37800-93-02-09000,Success,36.154352745335,-95.904136050171,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6535 E 5TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+27300-93-14-10790,Success,36.13340437884,-95.892534506557,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7610 E 21ST ST, TULSA, OK, 74129; Base match was already No Clear Match"
+38200-92-26-00840,Success,36.096150570208,-96.011567223566,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4629 S UNION AVE, TULSA, OK, 74107; Base match was already No Clear Match"
+76925-94-19-48280,Success,36.109344265182,-95.855125907702,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3712 S 109TH AVE E, TULSA, OK, 74146; Base match was already No Clear Match"
+23850-93-15-11970,Success,36.125397990555,-95.920001345741,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4999 E 26TH ST, TULSA, OK, 74114; Base match was already No Clear Match"
+74735-84-06-61950,Success,36.008315636109,-95.902370465624,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6623 E 107TH ST S, TULSA, OK, 74133; Base match was already No Clear Match"
+91407-14-07-52320,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+98434-84-34-00350,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+23000-03-27-08140,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+56600-92-20-00740,Success,36.075311325426,-96.030484631919,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3310 W 61ST ST S, TULSA, OK, 74132; Base match was already No Clear Match"
+56900-92-20-02220,Success,36.075320058224,-96.036295289667,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6115 S 39TH W AVE, TULSA, OK, 74132; Base match was already No Clear Match"
+54225-03-06-05290,Success,36.247416118787,-95.963923625838,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6439 N WHEELING AVE, TULSA, OK, 74130; Base match was already No Clear Match"
+91213-12-13-51390,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+91408-14-08-10310,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+54325-92-31-02630,Success,36.076375336297,-96.072336409795,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7118 W 60TH ST, TULSA, OK, 74107; Base match was already No Clear Match"
+90306-03-06-24020,Success,36.235130885205,-95.968590469881,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1641 E 56TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+91316-13-16-06210,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+91236-12-36-01030,Success,36.261663022556,-95.981458498328,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7403 N IROQUOIS AVE, TULSA, OK, 74126; Base match was already No Clear Match"
+53675-92-32-01900,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+90404-04-04-64010,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+53725-02-01-03030,Success,36.247074648443,-95.98045767849,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 905 E 64TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+97424-74-24-21620,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+91316-13-16-06510,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+99027-90-27-68130,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+55425-91-07-00270,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+91225-12-25-41510,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+99229-92-29-38016,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+54675-92-05-05450,Success,36.243053147604,-95.996199951831,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 32 W 62ND ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+90306-03-06-46920,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+20575-93-30-08990,Success,36.104171480129,-95.975656199171,Success,36.147890605377,-95.975600953152,3.02,High,False,No Clear Match,"Property geocoded via Census: 4103 S PEORIA AVE, TULSA, OK, 74105; Development geocode query used: 11th Street and Peoria, Tulsa, Oklahoma; Development geocoding succeeded; Geocoding shows the property is not meaningfully close (3.02 miles)"
+00725-03-33-00530,Success,36.17396807423,-95.937301147936,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1326 N KNOXVILLE AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+40375-94-08-07940,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+57628-73-15-20120,Success,35.946544178103,-95.922237006669,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 14901 S YALE AVE, BIXBY, OK, 74008; Base match was already No Clear Match"
+84830-72-11-53420,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+85175-72-12-57030,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+04175-93-14-07050,Success,36.120024986554,-95.890350186527,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7721 E 30TH PL, TULSA, OK, 74129; Base match was already No Clear Match"
+22775-94-17-02590,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+98412-84-12-02870,Success,36.056198069582,-95.772568578366,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 315 N 14TH ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+08675-93-01-02070,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+42025-93-07-18720,Success,36.143358722636,-95.966920277067,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1711 E 13TH PL, TULSA, OK, 74104; Base match was already No Clear Match"
+04025-93-15-00140,Success,36.125224699927,-95.904620160126,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2640 S SHERIDAN RD, TULSA, OK, 74129; Base match was already No Clear Match"
+77200-94-21-16190,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+47075-93-30-12810,Success,36.09921112691,-95.973476515502,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1356 E 44TH ST, TULSA, OK, 74105; Base match was already No Clear Match"
+11575-03-35-03730,Success,36.17260576985,-95.894883730598,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7350 E NEWTON ST, TULSA, OK, 74115; Base match was already No Clear Match"
+07415-94-07-29470,Success,36.176696776126,-95.877691815689,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1441 E 112TH PL, TULSA, OK, 74115; Base match was already No Clear Match"
+35725-93-31-08440,Success,36.079610394319,-95.973531032699,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5737 S QUINCY AVE, TULSA, OK, 74105; Base match was already No Clear Match"
+16375-93-03-04910,Success,36.151874235979,-95.908032944925,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 574 S MAPLEWOOD AVE, TULSA, OK, 74112; Base match was already No Clear Match"
+40325-94-17-06480,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+44325-03-36-04310,Success,36.174804451216,-95.870083257766,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 9541 E NEWTON PL, TULSA, OK, 74115; Base match was already No Clear Match"
+15875-02-25-09420,Success,36.188215694965,-95.980706132399,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2431 N LANSING AVE, TULSA, OK, 74106; Base match was already No Clear Match"
+04125-93-14-02940,Success,36.125780352058,-95.899279670355,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6743 E 26TH PL, TULSA, OK, 74129; Base match was already No Clear Match"
+17925-92-04-03240,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+49850-92-28-05460,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+98225-82-25-36030,Success,36.009163697637,-95.993797325012,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 10607 S ELWOOD AVE, JENKS, OK, 74037; Base match was already No Clear Match"
+04125-93-14-02930,Success,36.125780301401,-95.899254646343,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 6747 E 26TH PL, TULSA, OK, 74129; Base match was already No Clear Match"
+12375-92-04-01560,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+62250-91-22-02240,Success,36.105646583179,-96.125954567914,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 313 W 40TH PL, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+27325-93-14-12410,Success,36.133416285402,-95.887985234778,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7924 E 21ST ST, TULSA, OK, 74129; Base match was already No Clear Match"
+98402-84-02-01880,Success,36.062996207739,-95.796707501758,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 605 W LANSING ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+25050-03-34-06390,Success,36.16806289414,-95.910743801234,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5929 E KING ST, TULSA, OK, 74115; Base match was already No Clear Match"
+34375-92-22-05090,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+74850-94-19-17590,Success,36.11407360286,-95.8560701519,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 10826 E 33RD CT, TULSA, OK, 74146; Base match was already No Clear Match"
+14625-93-12-00820,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+62225-91-22-01600,Success,36.118635426957,-96.122042540885,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 112 W 31ST ST S, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+08300-93-04-02320,Success,36.152785790633,-95.94017234957,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3311 E 5TH PL, TULSA, OK, 74112; Base match was already No Clear Match"
+74965-94-20-07530,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+34600-93-25-02750,Success,36.03758332654,-95.92118150183,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4926 E 86TH PL, TULSA, OK, 74137; Base match was already No Clear Match"
+45350-94-06-06870,Success,36.160611304318,-95.857472431882,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 10620 E ADMIRAL PL, TULSA, OK, 74116; Base match was already No Clear Match"
+31100-93-02-05790,Success,36.04834383051,-95.995871415892,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 538 W 79TH PL S, TULSA, OK, 74132; Base match was already No Clear Match"
+26390-94-16-15330,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+82170-84-21-72600,Success,36.024128898996,-95.82126574882,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2812 S DOGWOOD AVE, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+03312-03-20-04220,Success,36.192953367237,-95.958083493635,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2645 N LEWIS AVE, TULSA, OK, 74110; Base match was already No Clear Match"
+04025-93-15-00650,Success,36.126287317756,-96.057697621672,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5790 W 26TH ST S, TULSA, OK, 74107; Base match was already No Clear Match"
+45625-93-21-16710,Success,36.113603297781,-95.927995374095,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3518 S SANDUSKY AVE, TULSA, OK, 74135; Base match was already No Clear Match"
+23600-93-24-15470,Success,36.117191865899,-95.884550101,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 8149 E 31ST CT, TULSA, OK, 74145; Base match was already No Clear Match"
+61975-91-12-03150,Success,36.144859317997,-96.098482932166,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 908 FOREST DR, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+24525-94-07-04110,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+46000-93-30-11430,Success,36.104229443331,-95.969789602016,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1558 E 41ST ST, TULSA, OK, 74105; Base match was already No Clear Match"
+46525-94-05-05250,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+22350-93-31-06310,Success,36.085678357775,-95.969010822147,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1608 E 54TH ST, TULSA, OK, 74105; Base match was already No Clear Match"
+85240-72-13-61990,Success,35.958031682379,-95.984095297932,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 14269 S QUINCE ST, GLENPOOL, OK, 74033; Base match was already No Clear Match"
+43800-93-04-19590,Success,36.153059589767,-95.930320524618,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 512 S QUEBEC AVE, TULSA, OK, 74112; Base match was already No Clear Match"
+04375-92-12-00740,Unusable Address,,,Not Needed,,,,Low,False,Unknown,Property address unusable for geocoding; Base match was Unknown
+10800-93-01-04840,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+45575-93-04-21370,Success,36.157698096158,-95.939268546018,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 234 S INDIANAPOLIS AVE, TULSA, OK, 74112; Base match was already No Clear Match"
+99301-93-01-11400,Success,36.161858145535,-95.874201676382,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 9201 E ADMIRAL CT, TULSA, OK, 74115; Base match was already No Clear Match"
+20300-92-03-06160,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+17925-92-04-03930,Success,36.220418298098,-96.000962464949,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 328 W 46TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+78540-84-14-02370,Success,36.037922046305,-95.796541598768,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 514 W QUINCY ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+12425-92-04-02590,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+08150-94-08-00330,Success,36.140687991192,-95.84970785134,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 11524 E 15TH ST, TULSA, OK, 74128; Base match was already No Clear Match"
+12210-94-16-41680,Success,36.123309481558,-95.828010259996,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 13322 E 28TH ST, TULSA, OK, 74134; Base match was already No Clear Match"
+45350-94-06-08780,Success,36.156197522006,-95.858043316557,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 10623 E 4TH ST, TULSA, OK, 74128; Base match was already No Clear Match"
+80610-84-11-13910,Success,36.05951854312,-95.794589098137,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 806 N CEDAR AVE, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+36540-94-02-16310,Success,36.153888335119,-95.793615090152,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 16312 E 4TH PL, TULSA, OK, 74108; Base match was already No Clear Match"
+57490-90-30-41030,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+12145-94-09-44920,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+14175-03-33-03800,Success,36.163742238234,-95.934123016087,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 131 N MARION AVE, TULSA, OK, 74115; Base match was already No Clear Match"
+16375-93-03-05080,Success,36.150629511148,-95.910781804952,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5939 E 7TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+30800-93-07-13130,Success,36.136976111735,-95.970811317116,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1716 S SAINT LOUIS AVE, TULSA, OK, 74120; Base match was already No Clear Match"
+61500-91-27-00840,Success,36.09673062987,-96.134198216533,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4817 NASSAU AVE, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+85375-72-14-01945,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+61940-91-27-37160,Success,36.097879941543,-96.132932862142,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 603 W 47TH PL, SAND SPRINGS, OK, 74063; Base match was already No Clear Match"
+46875-93-03-13050,Success,36.147883783425,-95.920160658728,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 5101 E 11TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+20300-92-03-04570,Success,36.1599237245,-96.011866743267,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1707 W EASTON PL, TULSA, OK, 74127; Base match was already No Clear Match"
+17950-92-04-04930,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+23850-93-15-12810,Success,36.12378979447,-95.922140316674,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4920 E 26TH PL, TULSA, OK, 74114; Base match was already No Clear Match"
+61000-14-31-00520,Success,36.261895180829,-95.853826540742,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 404 S BIRCH ST, OWASSO, OK, 74055; Base match was already No Clear Match"
+90308-03-08-08590,Success,36.231615243581,-95.953619889306,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 2661 E 54TH ST N, TULSA, OK, 74130; Base match was already No Clear Match"
+81210-84-15-63180,Success,36.036783664608,-95.808856924207,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1657 S PINE AVE, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+18950-93-33-02280,Success,36.079983777533,-95.926252230627,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4370 E 57TH PL, TULSA, OK, 74135; Base match was already No Clear Match"
+12145-94-09-42810,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+38125-92-27-17970,Success,36.099651836587,-96.016518288463,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4427 S ZENITH AVE, TULSA, OK, 74107; Base match was already No Clear Match"
+78260-84-12-00420,Success,36.05392363902,-95.777952241752,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 212 N 10TH ST, BROKEN ARROW, OK, 74012; Base match was already No Clear Match"
+42675-93-02-15780,Success,36.158088210502,-95.892321099825,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 7453 E 3RD ST, TULSA, OK, 74112; Base match was already No Clear Match"
+74850-94-19-17270,Success,36.114188150051,-95.856047076305,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 10829 E 33RD CT, TULSA, OK, 74146; Base match was already No Clear Match"
+74955-94-20-02740,Success,36.11686562129,-95.839047057092,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 12427 E 32ND PL, TULSA, OK, 74146; Base match was already No Clear Match"
+07900-94-18-00140,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+28725-92-34-02190,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+49900-93-21-18650,Success,36.112594855107,-95.933474593533,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3541 S NEW HAVEN AVE, TULSA, OK, 74135; Base match was already No Clear Match"
+58000-73-25-00270,Success,35.918462148875,-95.878987189539,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 8727 E 169TH PL S, BIXBY, OK, 74008; Base match was already No Clear Match"
+98210-82-10-15720,Unusable Address,,,Not Needed,,,,Low,False,No Clear Match,Property address unusable for geocoding; Base match was already No Clear Match
+19275-03-34-02810,Success,36.175339895256,-95.922193842199,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4925 E OKLAHOMA ST, TULSA, OK, 74115; Base match was already No Clear Match"
+31125-92-27-17320,Success,36.104477856625,-96.021681477923,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4107 SOUTHWEST BLVD, TULSA, OK, 74107; Base match was already No Clear Match"
+11600-93-30-07650,Success,36.102540599033,-95.973365823743,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1426 E 42ND ST, TULSA, OK, 74105; Base match was already No Clear Match"
+45350-94-06-07770,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+38975-92-33-02620,Success,36.086824329904,-96.034903835473,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 3751 W 52ND PL, TULSA, OK, 74107; Base match was already No Clear Match"
+61400-14-30-07430,Success,36.271364466499,-95.858740874065,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 402 N CARLSBAD ST, OWASSO, OK, 74055; Base match was already No Clear Match"
+36525-94-02-00450,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+61375-14-30-06240,Success,36.276273273195,-95.850030492597,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 901 N ELM ST, OWASSO, OK, 74055; Base match was already No Clear Match"
+26275-93-09-07670,Success,36.1477511656,-95.932488952614,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 4004 E 11TH ST, TULSA, OK, 74112; Base match was already No Clear Match"
+97328-73-28-61960,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+55980-74-05-47490,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+54425-02-02-04980,Success,36.238588870743,-96.000578285643,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 405 W 58TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+57320-14-33-14860,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+54375-02-01-07910,Success,36.240412057999,-95.977324240028,Not Needed,,,,Medium,False,No Clear Match,"Property geocoded via Census: 1148 E 60TH ST N, TULSA, OK, 74126; Base match was already No Clear Match"
+55200-91-10-03090,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+57845-73-14-53600,Failed,,,Not Needed,,,,Low,False,No Clear Match,Property geocoding failed via Census; Base match was already No Clear Match
+37425-04-21-00950,Unusable Address,,,Not Needed,,,,Low,False,Unknown,Property address unusable for geocoding; Base match was Unknown
+55200-91-10-01250,Failed,,,Failed,,,,Low,False,Possible Match,Property geocoding failed via Census; Development geocoding failed for all candidate queries; Match remains plausible but not distance-verified

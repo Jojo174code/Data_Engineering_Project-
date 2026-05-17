@@ -7,14 +7,18 @@ This repository stores iterative Tulsa auction analysis experiments and supporti
 | Iteration | Folder | Purpose | Status |
 |---|---|---|---|
 | Iteration 03 | `iterations/iteration_03_openai_ai_review/` | Corrected pipeline with OpenAI review and validation | Archived baseline |
-| Iteration 04 | `iterations/iteration_04_development_intelligence_ai_review/` | Corrected spreadsheet with OpenAI review and Tulsa development intelligence | Current |
+| Iteration 04 | `iterations/iteration_04_development_intelligence_ai_review/` | Corrected spreadsheet with OpenAI review and Tulsa development intelligence | Historical |
+| Iteration 05 | `iterations/iteration_05_strict_development_matching/` | Strict development matching pass that removed weak generic location matches | Historical |
+| Iteration 06 | `iterations/iteration_06_final_robust_ai_due_diligence/` | Final robust spreadsheet with strict development verification, geocoding checks, and OpenAI review | Final |
 
 ## Repository layout
 
 - `auction_lists/` keeps the source auction PDF
 - `iterations/` stores self-contained runs
 - `iterations/iteration_03_openai_ai_review/` stores the prior OpenAI-backed baseline
-- `iterations/iteration_04_development_intelligence_ai_review/` is the current development-intelligence pipeline
+- `iterations/iteration_04_development_intelligence_ai_review/` stores the development-intelligence pass
+- `iterations/iteration_05_strict_development_matching/` stores the strict text-matching pass
+- `iterations/iteration_06_final_robust_ai_due_diligence/` stores the final conservative screening pipeline with geocoding and AI review
 
 ## Due diligence warning
 

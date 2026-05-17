@@ -1,0 +1,8 @@
+total strict properties loaded: 371
+total manual-review candidates loaded: 50
+duplicate parcel IDs: 0
+missing addresses: 5
+missing parcel IDs: 0
+missing bid costs: 0
+final_property_base rows: 371
+final_development_intelligence rows: 7
