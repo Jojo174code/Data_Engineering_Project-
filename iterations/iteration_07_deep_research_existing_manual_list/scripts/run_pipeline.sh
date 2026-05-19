@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/ubuntu/OpenClaw_Context
+source .venv/bin/activate
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/parse_manual_review_pdf.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/assessor_lookup.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/neighborhoodscout_lookup.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/map_location_research.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/combine_research.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/ai_deep_property_reviewer.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/final_excel_writer.py
+python iterations/iteration_07_deep_research_existing_manual_list/scripts/validate_final_outputs.py

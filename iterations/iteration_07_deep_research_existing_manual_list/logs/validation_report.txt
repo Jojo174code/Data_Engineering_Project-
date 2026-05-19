@@ -1,0 +1,14 @@
+total properties reviewed: 50
+AI Red count: 0
+AI Yellow count: 50
+AI Green count: 0
+AI Purple count: 0
+upgrades count: 0
+downgrades count: 0
+same rating count: 0
+assessor matches: 50
+assessor failed matches: 0
+NeighborhoodScout successful matches: 50
+NeighborhoodScout unavailable count: 0
+geocoding success count: 7
+validation PASS
