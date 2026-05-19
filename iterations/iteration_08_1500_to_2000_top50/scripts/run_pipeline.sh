@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/ubuntu/OpenClaw_Context
+source .venv/bin/activate
+python iterations/iteration_08_1500_to_2000_top50/scripts/filter_1500_to_2000.py
+python iterations/iteration_08_1500_to_2000_top50/scripts/rank_1500_to_2000.py
+python iterations/iteration_08_1500_to_2000_top50/scripts/ai_review_1500_to_2000.py
+python iterations/iteration_08_1500_to_2000_top50/scripts/write_excel_1500_to_2000.py
+python iterations/iteration_08_1500_to_2000_top50/scripts/validate_1500_to_2000.py

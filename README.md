@@ -10,6 +10,7 @@ This repository stores iterative Tulsa auction analysis experiments and supporti
 | Iteration 04 | `iterations/iteration_04_development_intelligence_ai_review/` | Corrected spreadsheet with OpenAI review and Tulsa development intelligence | Historical |
 | Iteration 05 | `iterations/iteration_05_strict_development_matching/` | Strict development matching pass that removed weak generic location matches | Historical |
 | Iteration 06 | `iterations/iteration_06_final_robust_ai_due_diligence/` | Final robust spreadsheet with strict development verification, geocoding checks, and OpenAI review | Final |
+| Iteration 08 | `iterations/iteration_08_1500_to_2000_top50/` | Top 50 properties in the $1,500-$2,000 bid range with AI review | Current |
 
 ## Repository layout
 
