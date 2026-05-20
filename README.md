@@ -11,7 +11,8 @@ This repository stores iterative Tulsa auction analysis experiments and supporti
 | Iteration 05 | `iterations/iteration_05_strict_development_matching/` | Strict development matching pass that removed weak generic location matches | Historical |
 | Iteration 06 | `iterations/iteration_06_final_robust_ai_due_diligence/` | Final robust spreadsheet with strict development verification, geocoding checks, and OpenAI review | Final |
 | Iteration 08 | `iterations/iteration_08_1500_to_2000_top50/` | Top 50 properties in the $1,500-$2,000 bid range with AI review | Historical |
-| Iteration 10 | `iterations/iteration_10_900_to_1000_top50_crime_economic_ai/` | Top 50 $900-$1,000 properties with crime and economic area intelligence baked into AI ranking | Current |
+| Iteration 10 | `iterations/iteration_10_900_to_1000_top50_crime_economic_ai/` | Top 50 $900-$1,000 properties with crime and economic area intelligence baked into AI ranking | Historical |
+| Iteration 11 | `iterations/iteration_11_1000_to_1500_top50_crime_economic_ai/` | Top 50 $1,000-$1,500 properties with crime and economic area intelligence baked into AI ranking | Current |
 
 ## Repository layout
 
