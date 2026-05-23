@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/ubuntu/OpenClaw_Context
+source .venv/bin/activate
+python iterations/iteration_12_custom_33_property_ranking/scripts/prepare_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/enrich_from_prior_iterations.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/geocode_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/collect_area_intelligence_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/rank_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/ai_review_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/rank_custom_33.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/write_custom_33_excel.py
+python iterations/iteration_12_custom_33_property_ranking/scripts/validate_custom_33.py

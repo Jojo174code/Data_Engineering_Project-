@@ -1,0 +1,11 @@
+total custom properties: 33
+matched from prior iterations: 33
+geocoding success count: 33
+crime data coverage count: 33
+economic data coverage count: 29
+Tier 1 count: 0
+Tier 2 count: 16
+Tier 3 count: 14
+Tier 4 count: 3
+top 10 count: 10
+validation PASS
