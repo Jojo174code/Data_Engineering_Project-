@@ -1,0 +1,6 @@
+initial row count: 33
+duplicate parcel IDs detected: 0
+final row count: 33
+input written: /home/ubuntu/OpenClaw_Context/iterations/iteration_12_custom_33_property_ranking/input/custom_33_properties.csv
+base written: /home/ubuntu/OpenClaw_Context/iterations/iteration_12_custom_33_property_ranking/cleaned_data/custom_33_base.csv
+validation passed: row count is exactly 33

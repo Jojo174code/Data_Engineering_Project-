@@ -1,0 +1,14 @@
+source file used: /home/ubuntu/OpenClaw_Context/iterations/iteration_04_development_intelligence_ai_review/cleaned_data/cleaned_auction_properties.csv
+total filtered properties: 84
+total ranked properties: 84
+total AI-reviewed properties: 50
+top 50 count: 50
+high-risk count: 34
+average bid cost in top 50: 1683.16
+lowest bid in top 50: 1545.17
+highest bid in top 50: 1825.15
+Top Candidate count: 33
+Manual Review Candidate count: 17
+Risky / Needs Verification count: 0
+Avoid count: 0
+validation PASS

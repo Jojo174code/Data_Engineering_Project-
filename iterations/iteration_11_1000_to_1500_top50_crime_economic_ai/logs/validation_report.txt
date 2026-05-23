@@ -1,0 +1,15 @@
+source file used: /home/ubuntu/OpenClaw_Context/iterations/iteration_04_development_intelligence_ai_review/cleaned_data/cleaned_auction_properties.csv
+total properties in $1,000-$1,500 range: 62
+total geocoded successfully: 48
+total with crime data: 56
+total with economic data: 48
+top 50 count: 50
+Top Candidate count: 2
+Manual Review Candidate count: 0
+Risky / Needs Verification count: 48
+Avoid count: 0
+High crime risk count: 43
+Unknown crime risk count: 6
+High economic risk count: 17
+Unknown economic risk count: 5
+validation PASS

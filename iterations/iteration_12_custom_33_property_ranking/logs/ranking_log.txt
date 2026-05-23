@@ -1,0 +1,7 @@
+input row count: 33
+rule ranked row count: 33
+final ranked row count: 33
+Tier 1 Priority: 0
+Tier 2 Strong Review: 16
+Tier 3 Watch: 14
+Tier 4 High Risk: 3
