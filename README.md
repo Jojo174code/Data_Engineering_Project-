@@ -30,13 +30,17 @@ In plain English, the goal is to answer:
 If you want the short version of the project story, read:
 - `PROJECT_OVERVIEW.md`
 
+If you want the technical pipeline and AI architecture, read:
+- `TECHNICAL_OVERVIEW.md`
+
 ## Current recommended starting point
 
 If you are new to the repo, start here:
 1. `PROJECT_OVERVIEW.md`
-2. `README.md`
-3. `iterations/iteration_12_custom_33_property_ranking/README.md`
-4. the workbooks in `iterations/iteration_12_custom_33_property_ranking/output_excel/`
+2. `TECHNICAL_OVERVIEW.md`
+3. `README.md`
+4. `iterations/iteration_12_custom_33_property_ranking/README.md`
+5. the workbooks in `iterations/iteration_12_custom_33_property_ranking/output_excel/`
 
 ## Current iteration
 
@@ -66,6 +70,8 @@ If you are new to the repo, start here:
   - self-contained research runs, each with scripts, cleaned data, logs, and output workbooks
 - `PROJECT_OVERVIEW.md`
   - plain-language explanation of what the repo is doing
+- `TECHNICAL_OVERVIEW.md`
+  - technical explanation of the data engineering pipeline and AI integration design
 - `REPO_CLEANUP_NOTES.md`
   - notes for future structural cleanup without losing research history
 
@@ -84,6 +90,19 @@ That layout is intentional. It keeps each run reproducible and makes it easier t
 ## Methodology in one paragraph
 
 Each iteration usually starts with a property list or shortlist, enriches the rows with prior findings and public geocoding, adds area-level context such as crime and economic signals when available, applies a transparent rule-based score, optionally adds grounded AI review constrained to the actual row data, and then exports ranked spreadsheets for manual next steps.
+
+## Technical highlights
+
+From a technical perspective, the repo is built as an iteration-based batch pipeline with:
+- structured CSV intermediates at each major processing step
+- cross-iteration parcel/address enrichment
+- public geocoding with confidence labeling
+- tract-first and ZIP-fallback area joins for economic data
+- conservative crime-context attachment with explicit confidence caveats
+- weighted deterministic scoring before AI is applied
+- structured JSON AI outputs with validation and fallback behavior
+
+For the full technical breakdown, see `TECHNICAL_OVERVIEW.md`.
 
 ## Important limitations
 

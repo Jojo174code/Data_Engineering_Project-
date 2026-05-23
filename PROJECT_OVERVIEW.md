@@ -75,6 +75,21 @@ If you are new here, start with:
 4. that iteration's `README.md`
 5. the output workbooks inside its `output_excel/` folder
 
+## Technical angle
+
+Under the hood, this is also a small data-engineering and AI-integration project.
+
+The repo is not just collecting notes. It is building a repeatable pipeline that:
+- moves property data through staged CSV transformations
+- merges prior iteration outputs back into newer runs
+- geocodes rows and stores confidence metadata
+- joins area-level economic context using Census-style geography lookups
+- attaches crime context conservatively with confidence caveats
+- combines deterministic scoring with constrained AI review
+- validates the outputs before treating a run as complete
+
+If you want the more technical version, read `TECHNICAL_OVERVIEW.md`.
+
 ## Current state
 
 The current direction is a conservative auction screening system, not an automated buying bot.

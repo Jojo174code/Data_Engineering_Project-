@@ -14,6 +14,21 @@ This iteration ranks only 33 hand-selected Tulsa auction properties. It does not
 - adds area-level crime and Census-based economic context
 - produces a combined rule-based and AI-informed final ranking
 
+## Technical summary
+
+This iteration is implemented as a staged batch pipeline.
+Each script writes a concrete CSV artifact so the run can be inspected, debugged, or rerun from intermediate checkpoints.
+
+The technical design choices in this iteration include:
+- locked source-list creation to prevent accidental drift beyond the 33 selected properties
+- parcel-first enrichment joins with normalized-address fallback
+- prior-coordinate reuse before live geocoding
+- tract/ZIP geographic fallback for economic joins
+- explicit confidence labeling for geocoding, crime, and economics
+- weighted rule scoring before AI review
+- structured AI output schema with deterministic fallback
+- final validation of row counts, enums, workbook readability, and git hygiene
+
 ## Data flow
 
 1. `prepare_custom_33.py`
@@ -38,6 +53,8 @@ This iteration ranks only 33 hand-selected Tulsa auction properties. It does not
 
 6. `ai_review_custom_33.py`
    - reviews all 33 properties with OpenAI using only row-level data
+   - expects structured JSON output
+   - validates that reasoning references concrete bid, property, crime, economic, and confidence fields
    - falls back to rule-based output if the API is unavailable or returns unusable output
 
 7. `write_custom_33_excel.py`
@@ -56,6 +73,14 @@ This iteration ranks only 33 hand-selected Tulsa auction properties. It does not
   - properties flagged as Bid Candidate, Research First, or Drive By
 - `output_excel/custom_high_risk_watchlist.xlsx`
   - Tier 3 Watch, Tier 4 High Risk, and Avoid rows
+
+## AI integration notes
+
+The AI layer in this iteration is intentionally constrained.
+It is not allowed to invent ARV, rehab, rent, title status, liens, property condition, or unsupported crime/economic claims.
+
+The script passes only the row-level facts already present in the pipeline and then checks whether the model response is specific enough to be useful.
+If not, the run can retry once and then fall back to a deterministic record.
 
 ## Limitations
 
