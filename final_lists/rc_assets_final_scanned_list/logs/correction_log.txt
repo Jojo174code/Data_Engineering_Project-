@@ -1,0 +1,9 @@
+input_workbook=/home/ubuntu/OpenClaw_Context/final_lists/rc_assets_final_scanned_list/output_excel/rc_assets_final_scanned_bid_list.xlsx
+auction_pdf=/home/ubuntu/OpenClaw_Context/2026 auction.pdf
+previous_active_count=42
+deleted_count=9
+final_active_count=33
+deleted_parcels=['00575-93-06-01170', '05400-02-25-04330', '07600-02-24-01200', '24925-02-36-17420', '34300-03-32-15230', '34750-02-26-08160', '44675-92-08-04450', '44675-92-08-04460', '46465-92-11-31880']
+pdf_order_matches=29
+pdf_order_missing=4
+output_workbook=/home/ubuntu/OpenClaw_Context/final_lists/rc_assets_final_scanned_list/output_excel/rc_assets_final_scanned_bid_list_CORRECTED.xlsx
