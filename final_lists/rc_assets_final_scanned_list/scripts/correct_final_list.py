@@ -62,6 +62,21 @@ ECON_COLUMNS = [
 ]
 NEW_ORDER_COLUMNS = ["Auction List No", "Auction Source Page", "Auction Source Sequence"]
 HEADER_FILL = PatternFill(fill_type="solid", fgColor="00D9EAD3")
+ROW_COLOR_FILLS = {
+    "green": PatternFill(fill_type="solid", fgColor="00E2F0D9"),
+    "blue": PatternFill(fill_type="solid", fgColor="00DDEBF7"),
+    "purple": PatternFill(fill_type="solid", fgColor="00E4DFEC"),
+    "yellow": PatternFill(fill_type="solid", fgColor="00FFF2CC"),
+    "red": PatternFill(fill_type="solid", fgColor="00F4CCCC"),
+}
+AI_CATEGORY_FILLS = {
+    "Top Candidate": PatternFill(fill_type="solid", fgColor="00C6EFCE"),
+    "Strong Candidate": PatternFill(fill_type="solid", fgColor="00D9EAD3"),
+    "Watchlist": PatternFill(fill_type="solid", fgColor="00FFF2CC"),
+    "High Risk": PatternFill(fill_type="solid", fgColor="00F4CCCC"),
+    "Remove": PatternFill(fill_type="solid", fgColor="00EA9999"),
+}
+MAX_BID_FILL = PatternFill(fill_type="solid", fgColor="00FFE699")
 HEADER_FILLS = {
     "original": PatternFill(fill_type="solid", fgColor="00D9EAD3"),
     "auction": PatternFill(fill_type="solid", fgColor="00DDEBF7"),
@@ -186,40 +201,79 @@ def apply_base_style(cell):
     cell.border = THIN_BORDER
 
 
+def preferred_width(header: str, measured: int) -> int:
+    wide = {
+        "Address": 28,
+        "Notes": 42,
+        "crime_context_summary": 42,
+        "development_summary": 42,
+        "development_match_reason": 38,
+        "ai_summary": 44,
+        "ai_key_risks": 32,
+        "ai_due_diligence_next_step": 34,
+        "crime_source_url": 34,
+        "development_source_url": 34,
+        "Parcel ID": 19,
+        "Auction List No": 15,
+    }
+    if header in wide:
+        return max(wide[header], min(measured, 48))
+    if header in {"Color", "Grade", "#", "Original Rank", "Auction Source Page", "Auction Source Sequence"}:
+        return max(12, min(measured, 16))
+    return max(14, min(measured, 26))
+
+
 def write_df_sheet(ws, df: pd.DataFrame, style_map: dict, base_headers: list[str], hidden_columns: set[str] | None = None):
     hidden_columns = hidden_columns or set()
     ws.append(df.columns.tolist())
     for col in range(1, ws.max_column + 1):
         cell = ws.cell(1, col)
-        cell.font = Font(bold=True)
+        cell.font = Font(bold=True, size=12)
         cell.fill = HEADER_FILLS[classify_header(str(cell.value))]
         apply_base_style(cell)
+    ws.row_dimensions[1].height = 28
+    color_idx = df.columns.get_loc("Color") + 1 if "Color" in df.columns else None
+    max_bid_idx = df.columns.get_loc("Max Bid") + 1 if "Max Bid" in df.columns else None
+    ai_category_idx = df.columns.get_loc("ai_final_category") + 1 if "ai_final_category" in df.columns else None
     for _, row in df.iterrows():
         ws.append(row.tolist())
         current_row = ws.max_row
         parcel = normalize_parcel(row.get("Parcel ID")) if "Parcel ID" in df.columns else None
         styles = style_map.get(parcel)
+        row_fill = ROW_COLOR_FILLS.get(str(row.get("Color", "")).strip().lower())
         for idx, header in enumerate(df.columns, start=1):
             cell = ws.cell(current_row, idx)
             apply_base_style(cell)
+            cell.font = Font(size=11)
+            if row_fill:
+                cell.fill = copy(row_fill)
             if styles and header in base_headers:
                 base_idx = base_headers.index(header)
-                cell.fill = copy(styles["fills"][base_idx])
                 cell.font = copy(styles["fonts"][base_idx])
                 cell.border = copy(styles["borders"][base_idx])
                 cell.alignment = copy(styles["alignments"][base_idx])
                 cell.number_format = styles["formats"][base_idx]
+            if header in {"Notes", "crime_context_summary", "development_summary", "development_match_reason", "ai_summary", "ai_key_risks", "ai_due_diligence_next_step"}:
+                cell.alignment = Alignment(wrap_text=True, vertical="top")
+        if max_bid_idx:
+            ws.cell(current_row, max_bid_idx).fill = copy(MAX_BID_FILL)
+        if ai_category_idx:
+            cat = str(ws.cell(current_row, ai_category_idx).value)
+            if cat in AI_CATEGORY_FILLS:
+                ws.cell(current_row, ai_category_idx).fill = copy(AI_CATEGORY_FILLS[cat])
         for currency_col in ["Opening Bid", "Max Bid", "Bid Spread"]:
             if currency_col in df.columns:
                 cidx = df.columns.get_loc(currency_col) + 1
                 ws.cell(current_row, cidx).number_format = "$#,##0.00"
+        long_text = max(len(str(row.get(col, "") or "")) for col in [c for c in ["Notes", "crime_context_summary", "development_summary", "ai_summary"] if c in df.columns]) if any(c in df.columns for c in ["Notes", "crime_context_summary", "development_summary", "ai_summary"]) else 0
+        ws.row_dimensions[current_row].height = 42 if long_text > 120 else 28
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
-    ws.sheet_view.zoomScale = 90
+    ws.sheet_view.zoomScale = 110
     for col_idx in range(1, ws.max_column + 1):
         header = str(ws.cell(1, col_idx).value)
-        width = max(len(str(ws.cell(r, col_idx).value or "")) for r in range(1, ws.max_row + 1))
-        ws.column_dimensions[get_column_letter(col_idx)].width = min(max(width + 2, 12), 38 if 'summary' not in header.lower() else 45)
+        width = max(len(str(ws.cell(r, col_idx).value or "")) for r in range(1, ws.max_row + 1)) + 2
+        ws.column_dimensions[get_column_letter(col_idx)].width = preferred_width(header, width)
         if header in hidden_columns:
             ws.column_dimensions[get_column_letter(col_idx)].hidden = True
 
