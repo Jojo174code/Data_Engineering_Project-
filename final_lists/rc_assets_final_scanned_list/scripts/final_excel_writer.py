@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from copy import copy
 from pathlib import Path
 
 import pandas as pd
-from openpyxl import Workbook, load_workbook
-from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-INPUT_FILE = BASE_DIR / "input" / "rc_assets_final_bid_list_original.xlsx"
 CLEANED_CSV = BASE_DIR / "cleaned_data" / "rc_assets_final_cleaned_list.csv"
 REMOVED_CSV = BASE_DIR / "cleaned_data" / "removed_red_strikethrough_properties.csv"
 CRIME_CSV = BASE_DIR / "cleaned_data" / "crime_scan_results.csv"
@@ -26,13 +24,47 @@ AI_FILL = {
     "High Risk": "00F4CCCC",
     "Remove": "00FFC7CE",
 }
+COLOR_FILL = {
+    "green": "00E2F0D9",
+    "blue": "00DDEBF7",
+    "purple": "00E4DFEC",
+    "yellow": "00FFF2CC",
+    "red": "00F4CCCC",
+}
 MAX_BID_FILL = PatternFill(fill_type="solid", fgColor="00FFF2CC")
 HEADER_FILL = PatternFill(fill_type="solid", fgColor="00D9EAD3")
+THIN_BORDER = Border(
+    left=Side(style="thin", color="00D9D9D9"),
+    right=Side(style="thin", color="00D9D9D9"),
+    top=Side(style="thin", color="00D9D9D9"),
+    bottom=Side(style="thin", color="00D9D9D9"),
+)
+
+SORT_COLUMNS = [
+    "Auction Order",
+    "Auction List Order",
+    "Original Auction Order",
+    "Original Rank",
+    "Source Row",
+    "Source Page",
+    "Page",
+    "Original #",
+    "#",
+    "Rank",
+    "source_excel_row",
+]
+
+
+def safe_read_csv(path: Path, fallback_columns: list[str] | None = None) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame(columns=fallback_columns or [])
 
 
 def load_merged() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     cleaned = pd.read_csv(CLEANED_CSV)
-    removed = pd.read_csv(REMOVED_CSV)
+    removed = safe_read_csv(REMOVED_CSV, cleaned.columns.tolist())
     crime = pd.read_csv(CRIME_CSV)
     econ = pd.read_csv(ECON_CSV)
     ai = pd.read_csv(AI_CSV)
@@ -40,27 +72,8 @@ def load_merged() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFram
     return merged, removed, crime, econ, ai
 
 
-def build_style_map():
-    wb = load_workbook(INPUT_FILE)
-    ws = wb["Bid List"] if "Bid List" in wb.sheetnames else wb[wb.sheetnames[0]]
-    headers = [ws.cell(1, c).value for c in range(1, ws.max_column + 1)]
-    style_map = {}
-    for r in range(2, ws.max_row + 1):
-        parcel = ws.cell(r, headers.index("Parcel ID") + 1).value
-        if parcel is None:
-            continue
-        style_map[str(parcel)] = {
-            "fills": [copy(ws.cell(r, c).fill) for c in range(1, ws.max_column + 1)],
-            "fonts": [copy(ws.cell(r, c).font) for c in range(1, ws.max_column + 1)],
-            "borders": [copy(ws.cell(r, c).border) for c in range(1, ws.max_column + 1)],
-            "alignments": [copy(ws.cell(r, c).alignment) for c in range(1, ws.max_column + 1)],
-            "formats": [ws.cell(r, c).number_format for c in range(1, ws.max_column + 1)],
-        }
-    return style_map, headers
-
-
 def sort_main(df: pd.DataFrame) -> pd.DataFrame:
-    for col in ["Auction Order", "Auction List Order", "Original Auction Order", "Source Row", "Source Page", "Page", "Original #", "#", "Rank", "Original Rank", "source_excel_row"]:
+    for col in SORT_COLUMNS:
         if col in df.columns:
             return df.assign(_sort=pd.to_numeric(df[col], errors="coerce")).sort_values(["_sort", "source_excel_row"], kind="stable").drop(columns=["_sort"])
     return df.sort_values(["source_excel_row"], kind="stable")
@@ -70,48 +83,56 @@ def sort_cheapest(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(_bid=pd.to_numeric(df["Opening Bid"], errors="coerce")).sort_values(["_bid", "source_excel_row"], kind="stable").drop(columns=["_bid"])
 
 
-def write_sheet(ws, df: pd.DataFrame, style_map: dict, original_headers: list[str]):
+def apply_base_style(cell):
+    cell.alignment = Alignment(wrap_text=True, vertical="top")
+    cell.border = THIN_BORDER
+
+
+def apply_color_fill(cell, color_value: str):
+    fill_rgb = COLOR_FILL.get((color_value or "").strip().lower())
+    if fill_rgb:
+        cell.fill = PatternFill(fill_type="solid", fgColor=fill_rgb)
+
+
+def write_sheet(ws, df: pd.DataFrame):
     ws.append(df.columns.tolist())
     for c in range(1, ws.max_column + 1):
         cell = ws.cell(1, c)
         cell.font = Font(bold=True)
         cell.fill = HEADER_FILL
-        cell.alignment = Alignment(wrap_text=True, vertical="top")
+        apply_base_style(cell)
+
+    color_idx = df.columns.get_loc("Color") + 1 if "Color" in df.columns else None
+    max_bid_idx = df.columns.get_loc("Max Bid") + 1 if "Max Bid" in df.columns else None
+    category_idx = df.columns.get_loc("ai_final_category") + 1 if "ai_final_category" in df.columns else None
+
     for _, row in df.iterrows():
         ws.append(row.tolist())
         current_row = ws.max_row
-        parcel = str(row.get("Parcel ID"))
-        if parcel in style_map:
-            for idx, header in enumerate(df.columns, start=1):
-                cell = ws.cell(current_row, idx)
-                if header in original_headers:
-                    orig_idx = original_headers.index(header)
-                    cell.fill = copy(style_map[parcel]["fills"][orig_idx])
-                    cell.font = copy(style_map[parcel]["fonts"][orig_idx])
-                    cell.border = copy(style_map[parcel]["borders"][orig_idx])
-                    cell.alignment = copy(style_map[parcel]["alignments"][orig_idx])
-                    cell.number_format = style_map[parcel]["formats"][orig_idx]
-                else:
-                    cell.alignment = Alignment(wrap_text=True, vertical="top")
-        category_idx = df.columns.get_loc("ai_final_category") + 1 if "ai_final_category" in df.columns else None
+        color_value = str(row.get("Color", ""))
+        for idx in range(1, ws.max_column + 1):
+            cell = ws.cell(current_row, idx)
+            apply_base_style(cell)
+            if color_idx:
+                apply_color_fill(cell, color_value)
         if category_idx:
             val = ws.cell(current_row, category_idx).value
             if val in AI_FILL:
                 ws.cell(current_row, category_idx).fill = PatternFill(fill_type="solid", fgColor=AI_FILL[val])
-    if "Max Bid" in df.columns:
-        idx = df.columns.get_loc("Max Bid") + 1
-        for r in range(2, ws.max_row + 1):
-            ws.cell(r, idx).fill = MAX_BID_FILL
+        if max_bid_idx:
+            ws.cell(current_row, max_bid_idx).fill = MAX_BID_FILL
+
     for currency_col in ["Opening Bid", "Max Bid", "Bid Spread"]:
         if currency_col in df.columns:
             idx = df.columns.get_loc(currency_col) + 1
             for r in range(2, ws.max_row + 1):
                 ws.cell(r, idx).number_format = '$#,##0.00'
+
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
     for col_idx in range(1, ws.max_column + 1):
         width = max(len(str(ws.cell(r, col_idx).value or "")) for r in range(1, ws.max_row + 1))
-        ws.column_dimensions[get_column_letter(col_idx)].width = min(max(width + 2, 12), 40)
+        ws.column_dimensions[get_column_letter(col_idx)].width = min(max(width + 2, 12), 42)
 
 
 def summary_frame(merged: pd.DataFrame, removed: pd.DataFrame) -> pd.DataFrame:
@@ -121,7 +142,7 @@ def summary_frame(merged: pd.DataFrame, removed: pd.DataFrame) -> pd.DataFrame:
     rows.append(("final active property count", len(merged)))
     for name, series in [
         ("Color", merged["Color"].value_counts(dropna=False)),
-        ("Final Decision", merged["Final Decision"].value_counts(dropna=False) if "Final Decision" in merged.columns else pd.Series(dtype=int)),
+        ("Grade", merged["Grade"].value_counts(dropna=False) if "Grade" in merged.columns else pd.Series(dtype=int)),
         ("ai_final_category", merged["ai_final_category"].value_counts(dropna=False)),
         ("ai_bid_priority", merged["ai_bid_priority"].value_counts(dropna=False)),
         ("crime_risk_level", merged["crime_risk_level"].value_counts(dropna=False)),
@@ -149,12 +170,11 @@ def main() -> int:
     top = merged[(merged["ai_final_category"].isin(["Top Candidate", "Strong Candidate"])) | (merged["ai_bid_priority"].isin(["Priority 1", "Priority 2"]))].copy()
     summary = summary_frame(merged, removed)
 
-    style_map, original_headers = build_style_map()
     wb = Workbook()
     default = wb.active
     wb.remove(default)
 
-    sheets = [
+    for title, df in [
         ("Final List - Auction Order", merged),
         ("Final List - Cheapest First", cheapest),
         ("Top Candidates", top),
@@ -162,10 +182,9 @@ def main() -> int:
         ("Crime Scan", crime),
         ("Economic Scan", econ),
         ("Summary", summary),
-    ]
-    for title, df in sheets:
+    ]:
         ws = wb.create_sheet(title)
-        write_sheet(ws, df.fillna(""), style_map, original_headers)
+        write_sheet(ws, df.fillna(""))
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUTPUT_FILE)
@@ -174,7 +193,7 @@ def main() -> int:
     removed_wb = Workbook()
     rws = removed_wb.active
     rws.title = "Removed Red Crossed Out"
-    write_sheet(rws, removed.fillna(""), style_map, original_headers)
+    write_sheet(rws, removed.fillna(""))
     removed_wb.save(REMOVED_XLSX)
     print(f"saved={OUTPUT_FILE}")
     return 0

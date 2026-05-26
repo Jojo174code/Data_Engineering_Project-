@@ -1,9 +1,11 @@
-input_file=/home/ubuntu/OpenClaw_Context/final_lists/rc_assets_final_scanned_list/input/rc_assets_final_bid_list_original.xlsx
-sheet_used=Bid List
+input_file=/home/ubuntu/OpenClaw_Context/rc_assets_final_bid_list(max_b)(Bid List).csv
+backup_copy=/home/ubuntu/OpenClaw_Context/final_lists/rc_assets_final_scanned_list/input/rc_assets_final_bid_list(max_b)(Bid List).csv
+sheet_used=Bid List (CSV source)
 original_row_count=42
 removed_red_strikethrough_row_count=0
 final_active_row_count=42
 removed_parcel_ids=[]
 kept_parcel_ids_count=42
-columns_preserved=['#', 'Color', 'Source', 'Original Rank', 'Parcel ID', 'Address', 'Opening Bid', 'Max Bid', 'Bid Spread', 'Drive-By Status', 'Lien/Title Risk', 'Entitlement/Zoning Risk', 'Final Decision', 'Notes']
-sort_column_used=#
+columns_preserved=['#', 'Color', 'Source', 'Original Rank', 'Parcel ID', 'Address', 'Opening Bid', 'Max Bid', 'Bid Spread', 'Drive-By Status', 'Lien/Title Risk', 'Entitlement/Zoning Risk', 'Final Decision', 'Notes', 'Grade']
+sort_column_used=Original Rank
+crossout_detection_note=Using the pushed CSV as source of truth. No rows in this CSV were explicitly red and crossed out.

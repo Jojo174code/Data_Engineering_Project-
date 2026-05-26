@@ -1,4 +1,4 @@
-exists:rc_assets_final_bid_list_original.xlsx=PASS
+exists:rc_assets_final_bid_list(max_b)(Bid List).csv=PASS
 exists:rc_assets_final_cleaned_list.csv=PASS
 exists:removed_red_strikethrough_properties.csv=PASS
 exists:crime_scan_results.csv=PASS
