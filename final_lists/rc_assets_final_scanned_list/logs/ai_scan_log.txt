@@ -1,0 +1,3 @@
+ai_scan_completed=yes
+rows_scanned=42
+fallback_rows=42

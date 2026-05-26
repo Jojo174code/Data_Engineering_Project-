@@ -113,3 +113,7 @@ Area-level crime and economic data are screening signals only. They are not parc
 ## Due diligence warning
 
 This tool is a screening system only. It does not verify title, liens, code violations, zoning, flood zone, property condition, occupancy, structure quality, ARV, rehab cost, rentability, legal ownership, or whether the parcel is practically usable. Crime and economic data are area-level screening signals, not guarantees. Before bidding, manually verify through Tulsa County Assessor, Tulsa County Treasurer, title/lien research, code violation checks, zoning records, Google Street View, drive-by inspection, and nearby sold comps.
+
+Final RC Assets bid list is on branch `Final_list` under:
+
+`final_lists/rc_assets_final_scanned_list/`

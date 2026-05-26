@@ -1,0 +1,3 @@
+economic_scan_completed=yes
+rows_scanned=42
+method=conservative corridor/district matching, generic city overlap rejected

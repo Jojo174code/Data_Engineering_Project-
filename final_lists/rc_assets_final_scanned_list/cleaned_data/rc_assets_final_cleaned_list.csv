@@ -1,0 +1,43 @@
+#,Color,Source,Original Rank,Parcel ID,Address,Opening Bid,Max Bid,Bid Spread,Drive-By Status,Lien/Title Risk,Entitlement/Zoning Risk,Final Decision,Notes,source_excel_row,red_indicator_detected,strikethrough_detected,crossed_out_indicator_detected,cleaning_action
+1,Green,"$900–$1,000",7,44675-92-08-04460,5134 W CHARLES PAGE,907.78,,"=IF(H2="""","""",H2-G2)",Not Checked,Not Checked,Not Checked,Research,,2,False,False,False,kept
+2,Green,"$900–$1,000",1,01875-03-19-00200,2612 N TRENTON AV E,962.57,,"=IF(H3="""","""",H3-G3)",Not Checked,Not Checked,Not Checked,Research,,3,False,False,False,kept
+3,Blue,"$1,000–$1,500",50,96203-62-03-50220,18911 S 29 AV W,1064.76,,"=IF(H4="""","""",H4-G4)",Not Checked,Not Checked,Not Checked,Research,,4,False,False,False,kept
+4,Green,"$1,000–$1,500",36,43300-03-29-09940,2311 N ATLANTA AV E,1179.88,,"=IF(H5="""","""",H5-G5)",Not Checked,Not Checked,Not Checked,Research,,5,False,False,False,kept
+5,Green,"$1,000–$1,500",13,40875-02-13-11530,210 E 44 ST N,1184.93,,"=IF(H6="""","""",H6-G6)",Not Checked,Not Checked,Not Checked,Research,,6,False,False,False,kept
+6,Green,"$1,000–$1,500",5,24925-02-36-17420,1084 N NORFOLK AV E,1199.79,,"=IF(H7="""","""",H7-G7)",Not Checked,Not Checked,Not Checked,Research,,7,False,False,False,kept
+7,Green,"$1,000–$1,500",16,26725-02-25-16640,515 E UTE ST N,1216.55,,"=IF(H8="""","""",H8-G8)",Not Checked,Not Checked,Not Checked,Research,,8,False,False,False,kept
+8,Green,"$1,000–$1,500",32,41025-02-01-04710,5901 N GARRISON PL E,1273.2,,"=IF(H9="""","""",H9-G9)",Not Checked,Not Checked,Not Checked,Research,,9,False,False,False,kept
+9,Green,"$1,000–$1,500",33,41025-02-01-05430,522 E 59 ST N,1273.2,,"=IF(H10="""","""",H10-G10)",Not Checked,Not Checked,Not Checked,Research,,10,False,False,False,kept
+10,Green,"$1,000–$1,500",38,05850-03-30-04070,1844 N TRENTON AV E,1297.53,,"=IF(H11="""","""",H11-G11)",Not Checked,Not Checked,Not Checked,Research,,11,False,False,False,kept
+11,Purple,"$1,000–$1,500",28,90212-02-12-26700,1118 E 50 PL N,1317.38,,"=IF(H12="""","""",H12-G12)",Not Checked,Not Checked,Not Checked,Research,,12,False,False,False,kept
+12,Green,"$1,000–$1,500",21,05400-02-25-04330,524 E YOUNG ST N,1418.58,,"=IF(H13="""","""",H13-G13)",Not Checked,Not Checked,Not Checked,Research,,13,False,False,False,kept
+13,Green,"$1,500–$2,000",2,47175-03-29-18430,1903 N FLORENCE PL E,1549.17,,"=IF(H14="""","""",H14-G14)",Not Checked,Not Checked,Not Checked,Research,,14,False,False,False,kept
+14,Green,"$1,500–$2,000",7,38675-93-10-06110,1321 S DARLINGTON AV E,1603.63,,"=IF(H15="""","""",H15-G15)",Not Checked,Not Checked,Not Checked,Research,,15,False,False,False,kept
+15,Green,"$1,500–$2,000",12,40250-03-31-14910,1945 E NEWTON ST N,1613.17,,"=IF(H16="""","""",H16-G16)",Not Checked,Not Checked,Not Checked,Research,,16,False,False,False,kept
+16,Purple,"$1,500–$2,000",25,53825-02-02-01690,6369 N BOULDER AV W,1693.83,,"=IF(H17="""","""",H17-G17)",Not Checked,Not Checked,Not Checked,Research,,17,False,False,False,kept
+17,Green,"$1,500–$2,000",28,40825-02-13-08310,4337 N GARRISON AV E,1697.16,,"=IF(H18="""","""",H18-G18)",Not Checked,Not Checked,Not Checked,Research,,18,False,False,False,kept
+18,Green,"$1,500–$2,000",31,24675-03-31-13270,1404 N ST LOUIS AV E,1697.83,,"=IF(H19="""","""",H19-G19)",Not Checked,Not Checked,Not Checked,Research,,19,False,False,False,kept
+19,Purple,"$1,500–$2,000",36,56925-92-20-02770,3930 S 61 AV W,1716.68,,"=IF(H20="""","""",H20-G20)",Not Checked,Not Checked,Not Checked,Research,,20,False,False,False,kept
+20,Blue,"$1,500–$2,000",41,13850-93-05-10570,2621 E ADMIRAL CT N,1759.82,,"=IF(H21="""","""",H21-G21)",Not Checked,Not Checked,Not Checked,Research,,21,False,False,False,kept
+21,Green,"$1,500–$2,000",43,40850-02-12-07900,517 E 47 PL N,1771.82,,"=IF(H22="""","""",H22-G22)",Not Checked,Not Checked,Not Checked,Research,,22,False,False,False,kept
+22,Green,"$1,500–$2,000",44,40250-03-31-15190,2143 E NEWTON ST N,1778.61,,"=IF(H23="""","""",H23-G23)",Not Checked,Not Checked,Not Checked,Research,,23,False,False,False,kept
+23,Green,"$1,500–$2,000",46,44675-92-08-04450,5128 W CHARLES PAGE,1783.15,,"=IF(H24="""","""",H24-G24)",Not Checked,Not Checked,Not Checked,Research,,24,False,False,False,kept
+24,Green,Manual Review,2,34300-03-32-15230,135 N COLUMBIA AV E,3005.69,,"=IF(H25="""","""",H25-G25)",Not Checked,Not Checked,Not Checked,Research,,25,False,False,False,kept
+25,Green,Manual Review,8,44200-02-11-04390,4696 N BOULDER AV W,3075.02,,"=IF(H26="""","""",H26-G26)",Not Checked,Not Checked,Not Checked,Research,,26,False,False,False,kept
+26,Green,Manual Review,9,34750-02-26-08160,2507 N MAIN ST E TULSA,3097.02,,"=IF(H27="""","""",H27-G27)",Not Checked,Not Checked,Not Checked,Research,,27,False,False,False,kept
+27,Green,Manual Review,11,23175-03-30-13610,2526 N QUAKER AV E,3115.02,,"=IF(H28="""","""",H28-G28)",Not Checked,Not Checked,Not Checked,Research,,28,False,False,False,kept
+28,Green,Manual Review,15,53775-02-02-00220,6105 N MAIN ST E TULSA,3140.32,,"=IF(H29="""","""",H29-G29)",Not Checked,Not Checked,Not Checked,Research,,29,False,False,False,kept
+29,Purple,Manual Review,16,23125-02-25-15350,1864 N OWASSO AV E,3140.35,,"=IF(H30="""","""",H30-G30)",Not Checked,Not Checked,Not Checked,Research,,30,False,False,False,kept
+30,Green,Manual Review,17,07600-02-24-01200,820 E 36 ST N,3152.35,,"=IF(H31="""","""",H31-G31)",Not Checked,Not Checked,Not Checked,Research,,31,False,False,False,kept
+31,Green,Manual Review,21,44200-02-14-06630,18 E 44 PL N,3183.01,,"=IF(H32="""","""",H32-G32)",Not Checked,Not Checked,Not Checked,Research,,32,False,False,False,kept
+32,Green,Manual Review,26,07675-02-13-01140,4018 N GARRISON AV E,3245.67,,"=IF(H33="""","""",H33-G33)",Not Checked,Not Checked,Not Checked,Research,,33,False,False,False,kept
+33,Green,Manual Review,34,17675-02-24-07570,750 E 32 PL N,3310.33,,"=IF(H34="""","""",H34-G34)",Not Checked,Not Checked,Not Checked,Research,,34,False,False,False,kept
+34,Green,Manual Review,35,25500-03-29-06060,2625 E TECUMSEH ST N,3310.33,,"=IF(H35="""","""",H35-G35)",Not Checked,Not Checked,Not Checked,Research,,35,False,False,False,kept
+35,Green,Manual Review,36,44200-02-11-03380,4627 N BOSTON AV E,3311.0,,"=IF(H36="""","""",H36-G36)",Not Checked,Not Checked,Not Checked,Research,,36,False,False,False,kept
+36,Green,Manual Review,38,25375-03-29-05240,3215 E XYLER ST N,3313.8,,"=IF(H37="""","""",H37-G37)",Not Checked,Not Checked,Not Checked,Research,,37,False,False,False,kept
+37,Purple,Manual Review,39,90306-03-06-24020,1641 E 56 ST N,3314.33,,"=IF(H38="""","""",H38-G38)",Not Checked,Not Checked,Not Checked,Research,,38,False,False,False,kept
+38,Green,Manual Review,40,44250-02-12-15190,549 E 54 PL N,3327.0,,"=IF(H39="""","""",H39-G39)",Not Checked,Not Checked,Not Checked,Research,,39,False,False,False,kept
+39,Green,Manual Review,43,46465-92-11-31880,2034 S PHOENIX AV W,3329.0,,"=IF(H40="""","""",H40-G40)",Not Checked,Not Checked,Not Checked,Research,,40,False,False,False,kept
+40,Purple,Manual Review,48,29625-02-36-21010,419 E NEWTON PL N,3388.99,,"=IF(H41="""","""",H41-G41)",Not Checked,Not Checked,Not Checked,Research,,41,False,False,False,kept
+41,Purple,Manual Review,49,10450-03-19-50550,3128 N TROOST PL E,3389.11,,"=IF(H42="""","""",H42-G42)",Not Checked,Not Checked,Not Checked,Research,,42,False,False,False,kept
+42,Green,Manual Review,1,00575-93-06-01170,511 S VICTOR AV E,3910.27,,"=IF(H43="""","""",H43-G43)",Not Checked,Not Checked,Not Checked,Research,,43,False,False,False,kept
