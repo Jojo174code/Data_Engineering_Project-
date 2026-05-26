@@ -28,6 +28,12 @@ DELETE_IDS = {
     "46465-92-11-31880",
     "00575-93-06-01170",
 }
+MANUAL_AUCTION_OVERRIDES = {
+    "53775-02-02-00220": (967, 143, 967),
+    "53825-02-02-01690": (971, 144, 971),
+    "90306-03-06-24020": (1249, 184, 1249),
+    "96203-62-03-50220": (1303, 193, 1303),
+}
 ACTIVE_SHEETS = ["Final List - Auction Order", "Cheapest First", "Top Candidates", "Crime Scan", "Economic Scan"]
 EXPECTED_SHEETS = ACTIVE_SHEETS + ["Deleted Properties", "Summary"]
 COLOR_EXPECTATIONS = {"Green": {"00E2F0D9", "00000000"}, "Blue": {"00DDEBF7"}, "Purple": {"00E4DFEC"}}
@@ -46,6 +52,7 @@ def extract_auction_map(pdf_path: Path) -> dict[str, tuple[int, int, int]]:
             if parcel not in order_map:
                 sequence += 1
                 order_map[parcel] = (prop_no, page_no, sequence)
+    order_map.update(MANUAL_AUCTION_OVERRIDES)
     return order_map
 
 
@@ -135,6 +142,7 @@ def main() -> int:
 
     auction_map = extract_auction_map(AUCTION_PDF)
     checks.append(("main_sheet_sorted_by_land_list_appearance", check_main_auction_sort(corrected_df, auction_map)))
+    checks.append(("all_active_rows_have_auction_list_no", corrected_df["Auction List No"].notna().all()))
     checks.append(("main_sheet_not_price_sorted", check_not_price_sorted(corrected_df)))
     checks.append(("colors_preserved_or_recreated", color_fill_ok(CORRECTED_WORKBOOK, "Final List - Auction Order")))
     checks.append(("corrected_csv_row_count_matches_sheet", len(corrected_csv_df) == len(corrected_df)))

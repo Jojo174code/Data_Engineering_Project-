@@ -15,6 +15,7 @@ active_count_previous_minus_9=PASS
 no_duplicate_active_parcel_ids=PASS
 deleted_ids_not_elsewhere=PASS
 main_sheet_sorted_by_land_list_appearance=PASS
+all_active_rows_have_auction_list_no=PASS
 main_sheet_not_price_sorted=PASS
 colors_preserved_or_recreated=PASS
 corrected_csv_row_count_matches_sheet=PASS

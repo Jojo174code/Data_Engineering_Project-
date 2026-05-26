@@ -31,6 +31,12 @@ DELETE_TARGETS = [
     ("00575-93-06-01170", "511 S VICTOR AV E"),
 ]
 DELETE_IDS = {parcel for parcel, _ in DELETE_TARGETS}
+MANUAL_AUCTION_OVERRIDES = {
+    "53775-02-02-00220": (967, 143, 967),
+    "53825-02-02-01690": (971, 144, 971),
+    "90306-03-06-24020": (1249, 184, 1249),
+    "96203-62-03-50220": (1303, 193, 1303),
+}
 CRIME_COLUMNS = [
     "Parcel ID",
     "Address",
@@ -56,6 +62,14 @@ ECON_COLUMNS = [
 ]
 NEW_ORDER_COLUMNS = ["Auction List No", "Auction Source Page", "Auction Source Sequence"]
 HEADER_FILL = PatternFill(fill_type="solid", fgColor="00D9EAD3")
+HEADER_FILLS = {
+    "original": PatternFill(fill_type="solid", fgColor="00D9EAD3"),
+    "auction": PatternFill(fill_type="solid", fgColor="00DDEBF7"),
+    "crime": PatternFill(fill_type="solid", fgColor="00F4CCCC"),
+    "economic": PatternFill(fill_type="solid", fgColor="00E4DFEC"),
+    "ai": PatternFill(fill_type="solid", fgColor="00FCE5CD"),
+    "helper": PatternFill(fill_type="solid", fgColor="00EEEEEE"),
+}
 THIN_BORDER = Border(
     left=Side(style="thin", color="00D9D9D9"),
     right=Side(style="thin", color="00D9D9D9"),
@@ -81,6 +95,7 @@ def extract_auction_map(pdf_path: Path) -> dict[str, tuple[int, int, int]]:
             if parcel not in order_map:
                 sequence += 1
                 order_map[parcel] = (prop_no, page_no, sequence)
+    order_map.update(MANUAL_AUCTION_OVERRIDES)
     return order_map
 
 
@@ -152,17 +167,32 @@ def sort_cheapest(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(_bid=pd.to_numeric(df["Opening Bid"], errors="coerce")).sort_values(["_bid", "source_excel_row"], kind="stable").drop(columns=["_bid"])
 
 
+def classify_header(header: str) -> str:
+    if header in {"Auction List No", "Auction Source Page", "Auction Source Sequence"}:
+        return "auction"
+    if header.startswith("crime_") or header in CRIME_COLUMNS:
+        return "crime"
+    if header.startswith("economic_") or header.startswith("development_") or header in ECON_COLUMNS or header in {"matched_development_area", "matched_project_or_investment"}:
+        return "economic"
+    if header.startswith("ai_"):
+        return "ai"
+    if header in {"source_excel_row", "red_indicator_detected", "strikethrough_detected", "crossed_out_indicator_detected", "cleaning_action", "deletion_reason"}:
+        return "helper"
+    return "original"
+
+
 def apply_base_style(cell):
     cell.alignment = Alignment(wrap_text=True, vertical="top")
     cell.border = THIN_BORDER
 
 
-def write_df_sheet(ws, df: pd.DataFrame, style_map: dict, base_headers: list[str]):
+def write_df_sheet(ws, df: pd.DataFrame, style_map: dict, base_headers: list[str], hidden_columns: set[str] | None = None):
+    hidden_columns = hidden_columns or set()
     ws.append(df.columns.tolist())
     for col in range(1, ws.max_column + 1):
         cell = ws.cell(1, col)
         cell.font = Font(bold=True)
-        cell.fill = HEADER_FILL
+        cell.fill = HEADER_FILLS[classify_header(str(cell.value))]
         apply_base_style(cell)
     for _, row in df.iterrows():
         ws.append(row.tolist())
@@ -185,9 +215,28 @@ def write_df_sheet(ws, df: pd.DataFrame, style_map: dict, base_headers: list[str
                 ws.cell(current_row, cidx).number_format = "$#,##0.00"
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = ws.dimensions
+    ws.sheet_view.zoomScale = 90
     for col_idx in range(1, ws.max_column + 1):
+        header = str(ws.cell(1, col_idx).value)
         width = max(len(str(ws.cell(r, col_idx).value or "")) for r in range(1, ws.max_row + 1))
-        ws.column_dimensions[get_column_letter(col_idx)].width = min(max(width + 2, 12), 45)
+        ws.column_dimensions[get_column_letter(col_idx)].width = min(max(width + 2, 12), 38 if 'summary' not in header.lower() else 45)
+        if header in hidden_columns:
+            ws.column_dimensions[get_column_letter(col_idx)].hidden = True
+
+
+def order_columns(df: pd.DataFrame) -> pd.DataFrame:
+    preferred = [
+        "#", "Color", "Source", "Original Rank", "Auction List No", "Auction Source Page", "Auction Source Sequence",
+        "Parcel ID", "Address", "Opening Bid", "Max Bid", "Bid Spread", "Grade", "Drive-By Status",
+        "Lien/Title Risk", "Entitlement/Zoning Risk", "Final Decision", "Notes",
+        "crime_risk_level", "crime_context_summary", "crime_data_granularity", "crime_source_title", "crime_source_url", "crime_data_confidence",
+        "economic_signal_level", "development_match_strength", "matched_development_area", "matched_project_or_investment", "development_source_title", "development_source_url", "development_summary", "development_match_reason", "economic_data_confidence",
+        "ai_final_score", "ai_final_category", "ai_bid_priority", "ai_summary", "ai_key_risks", "ai_due_diligence_next_step", "ai_confidence",
+        "source_excel_row", "red_indicator_detected", "strikethrough_detected", "crossed_out_indicator_detected", "cleaning_action", "deletion_reason",
+    ]
+    ordered = [col for col in preferred if col in df.columns]
+    ordered += [col for col in df.columns if col not in ordered]
+    return df[ordered]
 
 
 def make_summary(previous_count: int, active_df: pd.DataFrame, deleted_df: pd.DataFrame) -> pd.DataFrame:
@@ -233,7 +282,9 @@ def main() -> int:
     deleted_df = add_auction_order_columns(deleted_df, auction_map)
     active_df = sort_active(active_df)
     deleted_df = sort_active(deleted_df)
-    cheapest_df = sort_cheapest(active_df.copy())
+    active_df = order_columns(active_df)
+    deleted_df = order_columns(deleted_df)
+    cheapest_df = order_columns(sort_cheapest(active_df.copy()))
     top_df = active_df[
         active_df["ai_final_category"].isin(["Top Candidate", "Strong Candidate"]) |
         active_df["ai_bid_priority"].isin(["Priority 1", "Priority 2"])
@@ -257,9 +308,10 @@ def main() -> int:
         ("Economic Scan", econ_df),
         ("Summary", summary_df),
     ]
+    hidden_cols = {"source_excel_row", "red_indicator_detected", "strikethrough_detected", "crossed_out_indicator_detected", "cleaning_action"}
     for title, df in sheets:
         ws = wb.create_sheet(title)
-        write_df_sheet(ws, df.fillna(""), style_map, base_headers)
+        write_df_sheet(ws, df.fillna(""), style_map, base_headers, hidden_columns=hidden_cols if title in {"Final List - Auction Order", "Cheapest First", "Top Candidates", "Deleted Properties"} else set())
     OUTPUT_WORKBOOK.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUTPUT_WORKBOOK)
 
